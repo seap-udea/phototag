@@ -13,16 +13,31 @@ This guide explains how to set up Google Drive API for persistent tag storage in
 
 ## 🔑 **Step 2: Create OAuth 2.0 Credentials**
 
+### Option A: Quick Setup (Recommended)
+
 1. **Go to "APIs & Services" > "Credentials"**
 2. **Click "Create Credentials" > "OAuth client ID"**
-3. **Configure OAuth consent screen** (if not done already):
+3. **If prompted to configure OAuth consent screen**:
    - Choose "External" user type
    - Fill in required fields (App name, User support email, Developer contact)
-   - Add your email to test users
+   - **IMPORTANT**: Add your email to test users in the "Test users" section
+   - **Publishing Status**: For testing, keep it in "Testing" mode
+   - **Scopes**: Add `https://www.googleapis.com/auth/drive.file` scope
 4. **Create OAuth client ID**:
    - Application type: "Desktop application"
    - Name: "Photo Tag App"
    - Click "Create"
+
+### Option B: Alternative Method (If OAuth consent screen is problematic)
+
+If you're having issues with the OAuth consent screen, you can use a service account instead:
+
+1. **Go to "APIs & Services" > "Credentials"**
+2. **Click "Create Credentials" > "Service account"**
+3. **Fill in the service account details**
+4. **Create and download the JSON key file**
+5. **Share your Google Drive folder with the service account email**
+6. **Use the service account credentials instead of OAuth**
 
 ## 📋 **Step 3: Get Refresh Token**
 
@@ -108,15 +123,32 @@ GOOGLE_FOLDER_ID=your_folder_id_here
 
 ### Common Issues:
 
-1. **"Invalid credentials"**:
+1. **"Error 403: access_denied" or "App not verified"**:
+   
+   **IMMEDIATE FIX:**
+   - **Go to Google Cloud Console**: https://console.cloud.google.com/
+   - **Navigate to**: APIs & Services > OAuth consent screen
+   - **Scroll down to "Test users" section**
+   - **Click "ADD USERS"**
+   - **Add your email address** (the same one you're using to test)
+   - **Click "SAVE"**
+   - **Wait 5-10 minutes** for changes to propagate
+   - **Try the OAuth flow again**
+   
+   **Additional checks:**
+   - **Make sure the app is in "Testing" mode** (not "In production")
+   - **Verify you're using the same email** that you added as a test user
+   - **Check that the required scopes are added**: `https://www.googleapis.com/auth/drive.file`
+
+2. **"Invalid credentials"**:
    - Check that all environment variables are set correctly
    - Verify the refresh token is valid
 
-2. **"Folder not found"**:
+3. **"Folder not found"**:
    - Ensure the folder ID is correct
    - Check that the folder is shared publicly
 
-3. **"Permission denied"**:
+4. **"Permission denied"**:
    - Verify the OAuth scope includes `https://www.googleapis.com/auth/drive.file`
    - Check that the app has access to the folder
 
