@@ -151,16 +151,9 @@ const nextConfig: NextConfig = {
 - `NEXT_TELEMETRY_DISABLED=1` (optional, for privacy)
 
 **Required for Google Drive storage (recommended):**
-
-**Option 1: OAuth Method**
 - `GOOGLE_CLIENT_ID` - Your Google OAuth client ID
 - `GOOGLE_CLIENT_SECRET` - Your Google OAuth client secret
 - `GOOGLE_REFRESH_TOKEN` - Your Google OAuth refresh token
-- `GOOGLE_FOLDER_ID` - Your Google Drive folder ID
-
-**Option 2: Service Account Method (Recommended)**
-- `GOOGLE_SERVICE_ACCOUNT_EMAIL` - Your service account email
-- `GOOGLE_PRIVATE_KEY` - Your service account private key
 - `GOOGLE_FOLDER_ID` - Your Google Drive folder ID
 
 **Note:** If Google Drive credentials are not provided, the app will use local storage (data will be lost on container restart).
