@@ -578,7 +578,7 @@ export default function Home() {
         {/* Footer */}
         <footer className="mt-12 text-center">
           <p className="text-sm text-gray-500">
-            <i>Desarrollado por Jorge I. Zuluaga (Astronomía, UdeA) con la asistencia de Cursor (2025) v0.1.0</i>
+            <i>Desarrollado por Jorge I. Zuluaga (Astronomía, UdeA) con la asistencia de Cursor (2025) v0.2.0</i>
           </p>
         </footer>
       </div>
