@@ -28,6 +28,7 @@ export default function Home() {
   const [justFinishedDragging, setJustFinishedDragging] = useState(false);
   const [dragStartPosition, setDragStartPosition] = useState({ x: 0, y: 0 });
   const [isSaving, setIsSaving] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Load tags from server on component mount
   useEffect(() => {
@@ -87,23 +88,28 @@ export default function Home() {
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     if (firstName.trim() && lastName.trim() && vinculo && yearIngreso.trim()) {
-      const newTag: Tag = {
-        id: Date.now().toString(),
-        x: clickPosition.x,
-        y: clickPosition.y,
-        firstName: firstName.trim(),
-        lastName: lastName.trim(),
-        vinculo: vinculo,
-        yearIngreso: yearIngreso.trim(),
-      };
-      const updatedTags = [...tags, newTag];
-      setTags(updatedTags);
-      await saveTagsToServer(updatedTags);
-      setFirstName('');
-      setLastName('');
-      setVinculo('');
-      setYearIngreso('');
-      setShowModal(false);
+      setIsSubmitting(true);
+      try {
+        const newTag: Tag = {
+          id: Date.now().toString(),
+          x: clickPosition.x,
+          y: clickPosition.y,
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
+          vinculo: vinculo,
+          yearIngreso: yearIngreso.trim(),
+        };
+        const updatedTags = [...tags, newTag];
+        setTags(updatedTags);
+        await saveTagsToServer(updatedTags);
+        setFirstName('');
+        setLastName('');
+        setVinculo('');
+        setYearIngreso('');
+        setShowModal(false);
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   }, [firstName, lastName, vinculo, yearIngreso, clickPosition, tags, saveTagsToServer]);
 
@@ -125,19 +131,24 @@ export default function Home() {
   const handleEditSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     if (firstName.trim() && lastName.trim() && vinculo && yearIngreso.trim() && editingTag) {
-      const updatedTags = tags.map(tag => 
-        tag.id === editingTag 
-          ? { ...tag, firstName: firstName.trim(), lastName: lastName.trim(), vinculo: vinculo, yearIngreso: yearIngreso.trim() }
-          : tag
-      );
-      setTags(updatedTags);
-      await saveTagsToServer(updatedTags);
-      setFirstName('');
-      setLastName('');
-      setVinculo('');
-      setYearIngreso('');
-      setEditingTag(null);
-      setShowModal(false);
+      setIsSubmitting(true);
+      try {
+        const updatedTags = tags.map(tag => 
+          tag.id === editingTag 
+            ? { ...tag, firstName: firstName.trim(), lastName: lastName.trim(), vinculo: vinculo, yearIngreso: yearIngreso.trim() }
+            : tag
+        );
+        setTags(updatedTags);
+        await saveTagsToServer(updatedTags);
+        setFirstName('');
+        setLastName('');
+        setVinculo('');
+        setYearIngreso('');
+        setEditingTag(null);
+        setShowModal(false);
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   }, [firstName, lastName, vinculo, yearIngreso, editingTag, tags, saveTagsToServer]);
 
@@ -475,14 +486,31 @@ export default function Home() {
                 <div className="flex gap-3">
                   <button
                     type="submit"
-                    className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+                    disabled={isSubmitting}
+                    className={`flex-1 py-2 px-4 rounded-md transition-colors flex items-center justify-center gap-2 ${
+                      isSubmitting 
+                        ? 'bg-gray-400 cursor-not-allowed' 
+                        : 'bg-blue-600 hover:bg-blue-700 text-white'
+                    }`}
                   >
-                    {editingTag ? 'Actualizar Persona' : 'Agregar Persona'}
+                    {isSubmitting ? (
+                      <>
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                        {editingTag ? 'Actualizando...' : 'Agregando...'}
+                      </>
+                    ) : (
+                      editingTag ? 'Actualizar Persona' : 'Agregar Persona'
+                    )}
                   </button>
                   <button
                     type="button"
                     onClick={handleModalClose}
-                    className="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 transition-colors"
+                    disabled={isSubmitting}
+                    className={`flex-1 py-2 px-4 rounded-md transition-colors ${
+                      isSubmitting 
+                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
+                        : 'bg-gray-300 text-gray-700 hover:bg-gray-400'
+                    }`}
                   >
                     Cancelar
                   </button>
