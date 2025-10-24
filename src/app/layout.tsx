@@ -13,8 +13,33 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Photo Tagging App",
-  description: "Interactive photo tagging application built with Next.js and React",
+  title: "Pregrado UdeA 2025",
+  description: "Pregrado de Astronomía - UdeA (2025): ¡16 años cumplidos!",
+  icons: {
+    icon: '/astrologo.png',
+    shortcut: '/astrologo.png',
+    apple: '/astrologo.png',
+  },
+  openGraph: {
+    title: "Pregrado UdeA 2025",
+    description: "Pregrado de Astronomía - UdeA (2025): ¡16 años cumplidos!",
+    images: [
+      {
+        url: '/astrologo.png',
+        width: 512,
+        height: 512,
+        alt: 'Pregrado de Astronomía UdeA',
+      },
+    ],
+    locale: 'es_ES',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Pregrado UdeA 2025",
+    description: "Pregrado de Astronomía - UdeA (2025): ¡16 años cumplidos!",
+    images: ['/astrologo.png'],
+  },
 };
 
 export default function RootLayout({
