@@ -1,48 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import path from 'path';
+import GoogleDriveStorage from '@/lib/googleDrive';
 
-const TAGS_FILE = path.join(process.cwd(), 'data', 'tags.json');
+// Initialize Google Drive storage
+const driveStorage = new GoogleDriveStorage();
 
-// Ensure data directory exists
-async function ensureDataDirectory() {
-  const dataDir = path.join(process.cwd(), 'data');
-  try {
-    await fs.access(dataDir);
-  } catch {
-    await fs.mkdir(dataDir, { recursive: true });
-  }
-}
-
-// GET /api/tags - Load tags from disk
+// GET /api/tags - Load tags from Google Drive
 export async function GET() {
   try {
-    await ensureDataDirectory();
-    
-    try {
-      const data = await fs.readFile(TAGS_FILE, 'utf8');
-      const parsedData = JSON.parse(data);
-      // Handle both old format (array) and new format (object with tags property)
-      const tags = Array.isArray(parsedData) ? parsedData : parsedData.tags || [];
-      return NextResponse.json({ success: true, tags });
-    } catch (error) {
-      // File doesn't exist yet, return empty array
-      return NextResponse.json({ success: true, tags: [] });
-    }
+    const tags = await driveStorage.loadTags();
+    return NextResponse.json({ success: true, tags });
   } catch (error) {
-    console.error('Error loading tags:', error);
+    console.error('Error loading tags from Google Drive:', error);
     return NextResponse.json(
-      { success: false, error: 'Failed to load tags' },
+      { success: false, error: 'Failed to load tags from Google Drive' },
       { status: 500 }
     );
   }
 }
 
-// POST /api/tags - Save tags to disk
+// POST /api/tags - Save tags to Google Drive
 export async function POST(request: NextRequest) {
   try {
-    await ensureDataDirectory();
-    
     const { tags } = await request.json();
     
     if (!Array.isArray(tags)) {
@@ -52,24 +30,24 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Add timestamp for when tags were saved
-    const dataToSave = {
-      tags,
-      lastUpdated: new Date().toISOString(),
-      version: 1
-    };
-
-    await fs.writeFile(TAGS_FILE, JSON.stringify(dataToSave, null, 2));
+    const success = await driveStorage.saveTags(tags);
     
-    return NextResponse.json({ 
-      success: true, 
-      message: 'Tags saved successfully',
-      lastUpdated: dataToSave.lastUpdated
-    });
+    if (success) {
+      return NextResponse.json({ 
+        success: true, 
+        message: 'Tags saved successfully to Google Drive',
+        lastUpdated: new Date().toISOString()
+      });
+    } else {
+      return NextResponse.json(
+        { success: false, error: 'Failed to save tags to Google Drive' },
+        { status: 500 }
+      );
+    }
   } catch (error) {
-    console.error('Error saving tags:', error);
+    console.error('Error saving tags to Google Drive:', error);
     return NextResponse.json(
-      { success: false, error: 'Failed to save tags' },
+      { success: false, error: 'Failed to save tags to Google Drive' },
       { status: 500 }
     );
   }

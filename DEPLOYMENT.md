@@ -111,6 +111,22 @@ The `Dockerfile` is optimized for production deployment:
 - **Performance:** Uses Next.js standalone output for smaller image size
 - **Port:** Exposes port 3000 as required
 
+### Persistent Storage
+
+The application supports two storage methods:
+
+1. **Google Drive Storage (Recommended for Production)**:
+   - Persistent across container restarts
+   - Accessible from anywhere
+   - Automatic backup
+   - Multi-user collaboration
+   - See `GOOGLE_DRIVE_SETUP.md` for detailed setup
+
+2. **Local Storage (Fallback)**:
+   - Works without external configuration
+   - Data lost on container restart
+   - Good for development/testing
+
 ### Next.js Configuration
 
 The `next.config.ts` includes:
@@ -129,10 +145,18 @@ const nextConfig: NextConfig = {
 
 ### Environment Variables
 
-Required environment variables:
+**Required for all deployments:**
 - `NODE_ENV=production`
 - `PORT=3000`
 - `NEXT_TELEMETRY_DISABLED=1` (optional, for privacy)
+
+**Required for Google Drive storage (recommended):**
+- `GOOGLE_CLIENT_ID` - Your Google OAuth client ID
+- `GOOGLE_CLIENT_SECRET` - Your Google OAuth client secret
+- `GOOGLE_REFRESH_TOKEN` - Your Google OAuth refresh token
+- `GOOGLE_FOLDER_ID` - Your Google Drive folder ID
+
+**Note:** If Google Drive credentials are not provided, the app will use local storage (data will be lost on container restart).
 
 ## 🚨 Troubleshooting
 
