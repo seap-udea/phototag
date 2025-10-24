@@ -30,12 +30,27 @@ export default function Home() {
   const [isSaving, setIsSaving] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isViewOnly, setIsViewOnly] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Check for view-only mode from URL parameter
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const viewOnly = urlParams.get('photo') === '1803';
     setIsViewOnly(viewOnly);
+  }, []);
+
+  // Check for mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                            window.innerWidth <= 768;
+      setIsMobile(isMobileDevice);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   // Load tags from server on component mount
@@ -79,8 +94,8 @@ export default function Home() {
   }, []);
 
   const handleImageClick = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
-    // Don't allow adding tags in view-only mode
-    if (isViewOnly) return;
+    // Don't allow adding tags in view-only mode or on mobile devices
+    if (isViewOnly || isMobile) return;
     
     // Don't open modal if we just finished dragging
     if (justFinishedDragging) {
@@ -94,7 +109,7 @@ export default function Home() {
     
     setClickPosition({ x, y });
     setShowModal(true);
-  }, [justFinishedDragging, isViewOnly]);
+  }, [justFinishedDragging, isViewOnly, isMobile]);
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
@@ -280,14 +295,14 @@ export default function Home() {
   };
 
   const handleDragStart = useCallback((e: React.MouseEvent, tagId: string) => {
-    // Don't allow dragging in view-only mode
-    if (isViewOnly) return;
+    // Don't allow dragging in view-only mode or on mobile devices
+    if (isViewOnly || isMobile) return;
     
     e.preventDefault();
     setDraggedTag(tagId);
     setIsDragging(true);
     setDragStartPosition({ x: e.clientX, y: e.clientY });
-  }, [isViewOnly]);
+  }, [isViewOnly, isMobile]);
 
   const handleDragMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!isDragging || !draggedTag) return;
@@ -356,6 +371,13 @@ export default function Home() {
               Pregrado de Astronomía - UdeA (2025): ¡16 años cumplidos!
             </h1>
           </div>
+          {isMobile && (
+            <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-red-600 font-medium text-center">
+                Para etiquetar debes usar un computador de escritorio
+              </p>
+            </div>
+          )}
           <p className="text-lg text-gray-600">
             {isViewOnly 
               ? "Visualiza las personas etiquetadas en la foto del cumpleaños 16 del pregrado de astronomía 2025. Pasa el mouse sobre las estrellas para ver la información de cada persona."
@@ -372,7 +394,7 @@ export default function Home() {
 
         <div className="relative max-w-6xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
           <div 
-            className={`relative ${isViewOnly ? 'cursor-default' : 'cursor-crosshair'}`}
+            className={`relative ${isViewOnly || isMobile ? 'cursor-default' : 'cursor-crosshair'}`}
             onClick={handleImageClick}
             onMouseMove={handleDragMove}
             onMouseUp={handleDragEnd}
@@ -390,8 +412,8 @@ export default function Home() {
               blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
             />
             
-            {/* Render star markers */}
-            {memoizedTags.map((tag) => (
+            {/* Render star markers - Hidden on mobile devices */}
+            {!isMobile && memoizedTags.map((tag) => (
               <div
                 key={tag.id}
                 className="absolute transform -translate-x-1/2 -translate-y-1/2 group"
@@ -404,13 +426,13 @@ export default function Home() {
                 <div className="relative">
                   <Star 
                     size={24} 
-                    className={`${getStarColor(tag.vinculo)} drop-shadow-lg ${isViewOnly ? 'cursor-default' : 'cursor-move'} hover:scale-110 transition-transform ${
+                    className={`${getStarColor(tag.vinculo)} drop-shadow-lg ${isViewOnly || isMobile ? 'cursor-default' : 'cursor-move'} hover:scale-110 transition-transform ${
                       draggedTag === tag.id ? 'scale-125 shadow-xl' : ''
                     }`}
                     onMouseDown={(e) => handleDragStart(e, tag.id)}
                     onDoubleClick={(e) => {
                       e.stopPropagation();
-                      if (!isViewOnly) {
+                      if (!isViewOnly && !isMobile) {
                         removeTag(tag.id);
                       }
                     }}
