@@ -353,13 +353,13 @@ export default function Home() {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-4">
             <h1 className="text-4xl font-bold text-gray-900">
-              Pregrado de Astronomía UdeA 2025: ¡16 años!
+              Pregrado de Astronomía - UdeA (2025): ¡16 años cumplidos!
             </h1>
           </div>
           <p className="text-lg text-gray-600">
             {isViewOnly 
               ? "Visualiza las personas etiquetadas en la foto del cumpleaños 16 del pregrado de astronomía 2025. Pasa el mouse sobre las estrellas para ver la información de cada persona."
-              : "Etiqueta las personas en la foto del cumpleaños 16 del pregrado de astronomía 2025. Haga clic en cualquier parte de la imagen para agregar información de una persona. Después de agregar la información, puedes editarla o eliminarla usando las cajas de texto que aparecen al final de la página. Puedes ver las personas etiquetadas pasando el mouse sobre las estrellas."
+              : "Etiqueta las personas en la foto del cumpleaños 16 del pregrado de astronomía 2025. Haga clic en cualquier parte de la imagen para agregar información de una persona. "
             }
           </p>
           {isSaving && (
