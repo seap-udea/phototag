@@ -34,7 +34,7 @@ export default function Home() {
   // Check for view-only mode from URL parameter
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const viewOnly = urlParams.get('view') === 'only';
+    const viewOnly = urlParams.get('photo') === '1803';
     setIsViewOnly(viewOnly);
   }, []);
 
@@ -353,14 +353,8 @@ export default function Home() {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-4">
             <h1 className="text-4xl font-bold text-gray-900">
-              ¡Etiquetame!
+              Pregrado de Astronomía UdeA 2025: ¡16 años!
             </h1>
-            {isViewOnly && (
-              <div className="flex items-center gap-2 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
-                <Eye className="w-4 h-4" />
-                Solo visualización
-              </div>
-            )}
           </div>
           <p className="text-lg text-gray-600">
             {isViewOnly 
@@ -636,6 +630,12 @@ export default function Home() {
         <footer className="mt-12 text-center">
           <p className="text-sm text-gray-500">
             <i>Desarrollado por Jorge I. Zuluaga (Astronomía, UdeA) con la asistencia de Cursor (2025) v0.2.0</i>
+            {isViewOnly && (
+              <span className="block mt-1 text-xs text-blue-600">
+                <Eye className="w-3 h-3 inline mr-1" />
+                Modo de solo visualización
+              </span>
+            )}
           </p>
         </footer>
       </div>
