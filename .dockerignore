@@ -1,0 +1,16 @@
+Dockerfile
+.dockerignore
+docker-compose.yml
+test-docker.sh
+DEPLOYMENT.md
+node_modules
+npm-debug.log
+README.md
+.env
+.env.local
+.env.production.local
+.env.local
+.git
+.gitignore
+.next
+.vercel
