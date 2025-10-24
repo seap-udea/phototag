@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import Image from "next/image";
 import { X, User, Star } from 'lucide-react';
 
@@ -27,6 +27,47 @@ export default function Home() {
   const [isDragging, setIsDragging] = useState(false);
   const [justFinishedDragging, setJustFinishedDragging] = useState(false);
   const [dragStartPosition, setDragStartPosition] = useState({ x: 0, y: 0 });
+  const [isSaving, setIsSaving] = useState(false);
+
+  // Load tags from server on component mount
+  useEffect(() => {
+    const loadTags = async () => {
+      try {
+        const response = await fetch('/api/tags');
+        const data = await response.json();
+        if (data.success && data.tags) {
+          setTags(data.tags);
+        }
+      } catch (error) {
+        console.error('Error loading tags:', error);
+      }
+    };
+    
+    loadTags();
+  }, []);
+
+  // Save tags to server whenever tags change
+  const saveTagsToServer = useCallback(async (tagsToSave: Tag[]) => {
+    setIsSaving(true);
+    try {
+      const response = await fetch('/api/tags', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ tags: tagsToSave }),
+      });
+      
+      const data = await response.json();
+      if (!data.success) {
+        console.error('Failed to save tags:', data.error);
+      }
+    } catch (error) {
+      console.error('Error saving tags:', error);
+    } finally {
+      setIsSaving(false);
+    }
+  }, []);
 
   const handleImageClick = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
     // Don't open modal if we just finished dragging
@@ -43,7 +84,7 @@ export default function Home() {
     setShowModal(true);
   }, [justFinishedDragging]);
 
-  const handleSubmit = useCallback((e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     if (firstName.trim() && lastName.trim() && vinculo && yearIngreso.trim()) {
       const newTag: Tag = {
@@ -55,18 +96,22 @@ export default function Home() {
         vinculo: vinculo,
         yearIngreso: yearIngreso.trim(),
       };
-      setTags(prevTags => [...prevTags, newTag]);
+      const updatedTags = [...tags, newTag];
+      setTags(updatedTags);
+      await saveTagsToServer(updatedTags);
       setFirstName('');
       setLastName('');
       setVinculo('');
       setYearIngreso('');
       setShowModal(false);
     }
-  }, [firstName, lastName, vinculo, yearIngreso, clickPosition]);
+  }, [firstName, lastName, vinculo, yearIngreso, clickPosition, tags, saveTagsToServer]);
 
-  const removeTag = useCallback((id: string) => {
-    setTags(prevTags => prevTags.filter(tag => tag.id !== id));
-  }, []);
+  const removeTag = useCallback(async (id: string) => {
+    const updatedTags = tags.filter(tag => tag.id !== id);
+    setTags(updatedTags);
+    await saveTagsToServer(updatedTags);
+  }, [tags, saveTagsToServer]);
 
   const startEditing = useCallback((tag: Tag) => {
     setEditingTag(tag.id);
@@ -77,14 +122,16 @@ export default function Home() {
     setShowModal(true);
   }, []);
 
-  const handleEditSubmit = useCallback((e: React.FormEvent) => {
+  const handleEditSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     if (firstName.trim() && lastName.trim() && vinculo && yearIngreso.trim() && editingTag) {
-      setTags(prevTags => prevTags.map(tag => 
+      const updatedTags = tags.map(tag => 
         tag.id === editingTag 
           ? { ...tag, firstName: firstName.trim(), lastName: lastName.trim(), vinculo: vinculo, yearIngreso: yearIngreso.trim() }
           : tag
-      ));
+      );
+      setTags(updatedTags);
+      await saveTagsToServer(updatedTags);
       setFirstName('');
       setLastName('');
       setVinculo('');
@@ -92,7 +139,7 @@ export default function Home() {
       setEditingTag(null);
       setShowModal(false);
     }
-  }, [firstName, lastName, vinculo, yearIngreso, editingTag]);
+  }, [firstName, lastName, vinculo, yearIngreso, editingTag, tags, saveTagsToServer]);
 
   const downloadTags = useCallback(() => {
     if (tags.length === 0) {
@@ -133,7 +180,7 @@ export default function Home() {
     URL.revokeObjectURL(url);
   }, [tags]);
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -143,7 +190,7 @@ export default function Home() {
     }
 
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = async (e) => {
       try {
         const jsonData = JSON.parse(e.target?.result as string);
         
@@ -179,17 +226,23 @@ export default function Home() {
         }
 
         // Ask user if they want to replace existing tags or add to them
+        let finalTags;
         if (tags.length > 0) {
           const replace = confirm(`Ya hay ${tags.length} etiquetas. ¿Desea reemplazarlas con las ${validTags.length} etiquetas del archivo?`);
           if (replace) {
-            setTags(validTags);
+            finalTags = validTags;
+            setTags(finalTags);
           } else {
-            setTags([...tags, ...validTags]);
+            finalTags = [...tags, ...validTags];
+            setTags(finalTags);
           }
         } else {
-          setTags(validTags);
+          finalTags = validTags;
+          setTags(finalTags);
         }
 
+        // Save the uploaded tags to server
+        await saveTagsToServer(finalTags);
         alert(`Se cargaron ${validTags.length} etiquetas exitosamente`);
         
       } catch (error) {
@@ -219,22 +272,25 @@ export default function Home() {
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
     
-    setTags(prevTags => prevTags.map(tag => 
+    const updatedTags = tags.map(tag => 
       tag.id === draggedTag 
         ? { ...tag, x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) }
         : tag
-    ));
-  }, [isDragging, draggedTag]);
+    );
+    setTags(updatedTags);
+  }, [isDragging, draggedTag, tags]);
 
-  const handleDragEnd = useCallback(() => {
+  const handleDragEnd = useCallback(async () => {
     setDraggedTag(null);
     setIsDragging(false);
     // Only set justFinishedDragging if we were actually dragging
     if (draggedTag) {
       setJustFinishedDragging(true);
       setTimeout(() => setJustFinishedDragging(false), 200);
+      // Save the updated tags after dragging
+      await saveTagsToServer(tags);
     }
-  }, [draggedTag]);
+  }, [draggedTag, tags, saveTagsToServer]);
 
   const getStarColor = useCallback((vinculo: string) => {
     switch (vinculo) {
@@ -276,6 +332,12 @@ export default function Home() {
           <p className="text-lg text-gray-600">
           Etiqueta las personas en la foto del cumpleaños 16 del pregrado de astronomía 2025. Haga clic en cualquier parte de la imagen para agregar información de una persona. Después de agregar la información, puedes editarla o eliminarla usando las cajas de texto que aparecen al final de la página. Puedes ver las personas etiquetadas pasando el mouse sobre las estrellas.
           </p>
+          {isSaving && (
+            <div className="mt-4 inline-flex items-center gap-2 text-sm text-blue-600">
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+              Guardando etiquetas...
+            </div>
+          )}
         </div>
 
         <div className="relative max-w-6xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
