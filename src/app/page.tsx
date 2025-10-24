@@ -31,6 +31,7 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isViewOnly, setIsViewOnly] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   // Check for view-only mode from URL parameter
   useEffect(() => {
@@ -39,8 +40,15 @@ export default function Home() {
     setIsViewOnly(viewOnly);
   }, []);
 
-  // Check for mobile device
+  // Set client-side flag to prevent hydration issues
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Check for mobile device (only after client-side hydration)
+  useEffect(() => {
+    if (!isClient) return;
+
     const checkMobile = () => {
       const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
                             window.innerWidth <= 768;
@@ -51,7 +59,7 @@ export default function Home() {
     window.addEventListener('resize', checkMobile);
     
     return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  }, [isClient]);
 
   // Load tags from server on component mount
   useEffect(() => {
@@ -371,7 +379,7 @@ export default function Home() {
               Pregrado de Astronomía - UdeA (2025): ¡16 años cumplidos!
             </h1>
           </div>
-          {isMobile && (
+          {isClient && isMobile && (
             <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
               <p className="text-red-600 font-medium text-center">
                 Para etiquetar debes usar un computador de escritorio
@@ -413,7 +421,7 @@ export default function Home() {
             />
             
             {/* Render star markers - Hidden on mobile devices */}
-            {!isMobile && memoizedTags.map((tag) => (
+            {isClient && !isMobile && memoizedTags.map((tag) => (
               <div
                 key={tag.id}
                 className="absolute transform -translate-x-1/2 -translate-y-1/2 group"
