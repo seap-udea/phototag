@@ -134,7 +134,22 @@ class GoogleDriveStorage {
         alt: 'media',
       });
 
-      const content = response.data as string;
+      console.log('Google Drive response:', typeof response.data, response.data);
+      
+      // Handle different response formats
+      let content: string;
+      if (typeof response.data === 'string') {
+        content = response.data;
+      } else if (response.data && typeof response.data === 'object') {
+        // If it's already parsed, use it directly
+        const parsedData = response.data;
+        console.log('Using parsed data directly:', parsedData);
+        return Array.isArray(parsedData) ? parsedData : parsedData.tags || [];
+      } else {
+        content = JSON.stringify(response.data);
+      }
+      
+      console.log('Content to parse:', content);
       const parsedData = JSON.parse(content);
       
       // Handle both old format (array) and new format (object with tags property)
