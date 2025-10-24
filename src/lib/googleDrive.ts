@@ -5,9 +5,6 @@ interface GoogleDriveConfig {
   clientSecret: string;
   refreshToken: string;
   folderId: string;
-  // Service account credentials
-  serviceAccountEmail: string;
-  privateKey: string;
 }
 
 class GoogleDriveStorage {
@@ -22,8 +19,6 @@ class GoogleDriveStorage {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
       refreshToken: process.env.GOOGLE_REFRESH_TOKEN || '',
       folderId: process.env.GOOGLE_FOLDER_ID || '',
-      serviceAccountEmail: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || '',
-      privateKey: process.env.GOOGLE_PRIVATE_KEY || '',
     };
 
     // Only initialize if we have all required credentials
@@ -33,47 +28,24 @@ class GoogleDriveStorage {
   }
 
   private isConfigured(): boolean {
-    // Check for OAuth credentials
-    const hasOAuth = !!(
+    return !!(
       this.config.clientId &&
       this.config.clientSecret &&
       this.config.refreshToken &&
       this.config.folderId
     );
-    
-    // Check for service account credentials
-    const hasServiceAccount = !!(
-      this.config.serviceAccountEmail &&
-      this.config.privateKey &&
-      this.config.folderId
-    );
-    
-    return hasOAuth || hasServiceAccount;
   }
 
   private initializeAuth() {
-    // Check if we have service account credentials
-    if (this.config.serviceAccountEmail && this.config.privateKey) {
-      // Use service account authentication
-      this.auth = new google.auth.GoogleAuth({
-        credentials: {
-          client_email: this.config.serviceAccountEmail,
-          private_key: this.config.privateKey,
-        },
-        scopes: ['https://www.googleapis.com/auth/drive.file'],
-      });
-    } else {
-      // Use OAuth2 authentication
-      this.auth = new google.auth.OAuth2(
-        this.config.clientId,
-        this.config.clientSecret,
-        'urn:ietf:wg:oauth:2.0:oob'
-      );
+    this.auth = new google.auth.OAuth2(
+      this.config.clientId,
+      this.config.clientSecret,
+      'urn:ietf:wg:oauth:2.0:oob'
+    );
 
-      this.auth.setCredentials({
-        refresh_token: this.config.refreshToken,
-      });
-    }
+    this.auth.setCredentials({
+      refresh_token: this.config.refreshToken,
+    });
 
     this.drive = google.drive({ version: 'v3', auth: this.auth });
   }
@@ -85,6 +57,8 @@ class GoogleDriveStorage {
     }
 
     try {
+      console.log('Saving tags to Google Drive...', { tagsCount: tags.length, folderId: this.config.folderId });
+      
       const dataToSave = {
         tags,
         lastUpdated: new Date().toISOString(),
@@ -92,7 +66,6 @@ class GoogleDriveStorage {
       };
 
       const jsonString = JSON.stringify(dataToSave, null, 2);
-      const buffer = Buffer.from(jsonString, 'utf8');
 
       if (this.fileId) {
         // Update existing file
@@ -100,7 +73,7 @@ class GoogleDriveStorage {
           fileId: this.fileId,
           media: {
             mimeType: 'application/json',
-            body: buffer,
+            body: jsonString,
           },
         });
       } else {
@@ -112,12 +85,14 @@ class GoogleDriveStorage {
           },
           media: {
             mimeType: 'application/json',
-            body: buffer,
+            body: jsonString,
           },
         });
         this.fileId = response.data.id;
+        console.log('File created in Google Drive:', this.fileId);
       }
 
+      console.log('Successfully saved to Google Drive');
       return true;
     } catch (error) {
       console.error('Error saving to Google Drive:', error);
@@ -132,16 +107,23 @@ class GoogleDriveStorage {
     }
 
     try {
+      console.log('Loading tags from Google Drive...', { folderId: this.config.folderId });
+      
       if (!this.fileId) {
         // Try to find existing file
+        console.log('Searching for existing file in Google Drive...');
         const response = await this.drive.files.list({
           q: `name='phototag-tags.json' and parents in '${this.config.folderId}' and trashed=false`,
           fields: 'files(id, name)',
         });
 
+        console.log('Search results:', response.data.files);
+        
         if (response.data.files && response.data.files.length > 0) {
           this.fileId = response.data.files[0].id;
+          console.log('Found existing file:', this.fileId);
         } else {
+          console.log('No existing file found, returning empty array');
           return [];
         }
       }
