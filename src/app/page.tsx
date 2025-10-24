@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import Image from "next/image";
-import { X, User, Star } from 'lucide-react';
+import { X, User, Star, Eye } from 'lucide-react';
 
 interface Tag {
   id: string;
@@ -29,6 +29,14 @@ export default function Home() {
   const [dragStartPosition, setDragStartPosition] = useState({ x: 0, y: 0 });
   const [isSaving, setIsSaving] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isViewOnly, setIsViewOnly] = useState(false);
+
+  // Check for view-only mode from URL parameter
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const viewOnly = urlParams.get('view') === 'only';
+    setIsViewOnly(viewOnly);
+  }, []);
 
   // Load tags from server on component mount
   useEffect(() => {
@@ -71,6 +79,9 @@ export default function Home() {
   }, []);
 
   const handleImageClick = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+    // Don't allow adding tags in view-only mode
+    if (isViewOnly) return;
+    
     // Don't open modal if we just finished dragging
     if (justFinishedDragging) {
       setJustFinishedDragging(false);
@@ -83,7 +94,7 @@ export default function Home() {
     
     setClickPosition({ x, y });
     setShowModal(true);
-  }, [justFinishedDragging]);
+  }, [justFinishedDragging, isViewOnly]);
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
@@ -269,11 +280,14 @@ export default function Home() {
   };
 
   const handleDragStart = useCallback((e: React.MouseEvent, tagId: string) => {
+    // Don't allow dragging in view-only mode
+    if (isViewOnly) return;
+    
     e.preventDefault();
     setDraggedTag(tagId);
     setIsDragging(true);
     setDragStartPosition({ x: e.clientX, y: e.clientY });
-  }, []);
+  }, [isViewOnly]);
 
   const handleDragMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!isDragging || !draggedTag) return;
@@ -337,11 +351,22 @@ export default function Home() {
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            ¡Etiquetame!
-          </h1>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <h1 className="text-4xl font-bold text-gray-900">
+              ¡Etiquetame!
+            </h1>
+            {isViewOnly && (
+              <div className="flex items-center gap-2 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                <Eye className="w-4 h-4" />
+                Solo visualización
+              </div>
+            )}
+          </div>
           <p className="text-lg text-gray-600">
-          Etiqueta las personas en la foto del cumpleaños 16 del pregrado de astronomía 2025. Haga clic en cualquier parte de la imagen para agregar información de una persona. Después de agregar la información, puedes editarla o eliminarla usando las cajas de texto que aparecen al final de la página. Puedes ver las personas etiquetadas pasando el mouse sobre las estrellas.
+            {isViewOnly 
+              ? "Visualiza las personas etiquetadas en la foto del cumpleaños 16 del pregrado de astronomía 2025. Pasa el mouse sobre las estrellas para ver la información de cada persona."
+              : "Etiqueta las personas en la foto del cumpleaños 16 del pregrado de astronomía 2025. Haga clic en cualquier parte de la imagen para agregar información de una persona. Después de agregar la información, puedes editarla o eliminarla usando las cajas de texto que aparecen al final de la página. Puedes ver las personas etiquetadas pasando el mouse sobre las estrellas."
+            }
           </p>
           {isSaving && (
             <div className="mt-4 inline-flex items-center gap-2 text-sm text-blue-600">
@@ -353,7 +378,7 @@ export default function Home() {
 
         <div className="relative max-w-6xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
           <div 
-            className="relative cursor-crosshair"
+            className={`relative ${isViewOnly ? 'cursor-default' : 'cursor-crosshair'}`}
             onClick={handleImageClick}
             onMouseMove={handleDragMove}
             onMouseUp={handleDragEnd}
@@ -385,13 +410,15 @@ export default function Home() {
                 <div className="relative">
                   <Star 
                     size={24} 
-                    className={`${getStarColor(tag.vinculo)} drop-shadow-lg cursor-move hover:scale-110 transition-transform ${
+                    className={`${getStarColor(tag.vinculo)} drop-shadow-lg ${isViewOnly ? 'cursor-default' : 'cursor-move'} hover:scale-110 transition-transform ${
                       draggedTag === tag.id ? 'scale-125 shadow-xl' : ''
                     }`}
                     onMouseDown={(e) => handleDragStart(e, tag.id)}
                     onDoubleClick={(e) => {
                       e.stopPropagation();
-                      removeTag(tag.id);
+                      if (!isViewOnly) {
+                        removeTag(tag.id);
+                      }
                     }}
                   />
                   
@@ -520,8 +547,8 @@ export default function Home() {
           </div>
         )}
 
-        {/* Tags summary */}
-        {tags.length > 0 && (
+        {/* Tags summary - Hidden in view-only mode */}
+        {!isViewOnly && tags.length > 0 && (
           <div className="mt-8 max-w-6xl mx-auto">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">
               Personas Etiquetadas ({tags.length})
@@ -558,50 +585,52 @@ export default function Home() {
           </div>
         )}
         
-        {/* Download and Upload Buttons */}
-        <div className="mt-8 text-center">
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            {/* Download Button */}
-            {tags.length > 0 && (
-              <button
-                onClick={downloadTags}
-                className="bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-lg shadow-md transition-colors duration-200 flex items-center gap-2"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                Grabar etiquetas
-              </button>
-            )}
+        {/* Download and Upload Buttons - Hidden in view-only mode */}
+        {!isViewOnly && (
+          <div className="mt-8 text-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              {/* Download Button */}
+              {tags.length > 0 && (
+                <button
+                  onClick={downloadTags}
+                  className="bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-lg shadow-md transition-colors duration-200 flex items-center gap-2"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Grabar etiquetas
+                </button>
+              )}
+              
+              {/* Upload Button */}
+              <div className="relative">
+                <input
+                  type="file"
+                  accept=".json"
+                  onChange={handleFileUpload}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  id="upload-tags"
+                />
+                <label
+                  htmlFor="upload-tags"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg shadow-md transition-colors duration-200 flex items-center gap-2 cursor-pointer"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                  </svg>
+                  Subir etiquetas
+                </label>
+              </div>
+            </div>
             
-            {/* Upload Button */}
-            <div className="relative">
-              <input
-                type="file"
-                accept=".json"
-                onChange={handleFileUpload}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                id="upload-tags"
-              />
-              <label
-                htmlFor="upload-tags"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg shadow-md transition-colors duration-200 flex items-center gap-2 cursor-pointer"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                </svg>
-                Subir etiquetas
-              </label>
+            <div className="mt-3 text-xs text-gray-500 space-y-1">
+              {tags.length > 0 && (
+                <p>Descarga un archivo JSON con toda la información de las personas etiquetadas</p>
+              )}
+              <p>Sube un archivo JSON con etiquetas para cargar personas previamente guardadas</p>
             </div>
           </div>
-          
-          <div className="mt-3 text-xs text-gray-500 space-y-1">
-            {tags.length > 0 && (
-              <p>Descarga un archivo JSON con toda la información de las personas etiquetadas</p>
-            )}
-            <p>Sube un archivo JSON con etiquetas para cargar personas previamente guardadas</p>
-          </div>
-        </div>
+        )}
         
         {/* Footer */}
         <footer className="mt-12 text-center">
