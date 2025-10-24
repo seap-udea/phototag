@@ -16,7 +16,10 @@ export const metadata: Metadata = {
   title: "Pregrado UdeA 2025",
   description: "Pregrado de Astronomía - UdeA (2025): ¡16 años cumplidos!",
   icons: {
-    icon: '/astrologo.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/astrologo.png', type: 'image/png' }
+    ],
     shortcut: '/astrologo.png',
     apple: '/astrologo.png',
   },
