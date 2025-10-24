@@ -28,16 +28,106 @@ This guide explains how to set up Google Drive API for persistent tag storage in
    - Name: "Photo Tag App"
    - Click "Create"
 
-### Option B: Alternative Method (If OAuth consent screen is problematic)
+### Option B: Service Account Method (Recommended - Easier Setup)
 
-If you're having issues with the OAuth consent screen, you can use a service account instead:
+Service accounts are often easier to set up and don't require OAuth consent screen configuration:
 
-1. **Go to "APIs & Services" > "Credentials"**
-2. **Click "Create Credentials" > "Service account"**
-3. **Fill in the service account details**
-4. **Create and download the JSON key file**
-5. **Share your Google Drive folder with the service account email**
-6. **Use the service account credentials instead of OAuth**
+#### **Step B1: Create Service Account**
+
+1. **Go to Google Cloud Console**: https://console.cloud.google.com/
+2. **Navigate to**: APIs & Services > Credentials
+3. **Click "Create Credentials" > "Service account"**
+4. **Fill in the service account details**:
+   - **Service account name**: `phototag-storage`
+   - **Service account ID**: `phototag-storage` (auto-generated)
+   - **Description**: `Service account for Photo Tag app storage`
+5. **Click "Create and Continue"**
+6. **Skip the "Grant access" step** (click "Continue")
+7. **Click "Done"**
+
+#### **Step B2: Create and Download Key**
+
+1. **Find your service account** in the credentials list
+2. **Click on the service account email**
+3. **Go to "Keys" tab**
+4. **Click "Add Key" > "Create new key"**
+5. **Choose "JSON" format**
+6. **Click "Create"**
+7. **Download the JSON file** (keep it secure!)
+
+#### **Step B3: Share Google Drive Folder**
+
+1. **Go to Google Drive**: https://drive.google.com/
+2. **Create a new folder** (e.g., "Photo Tag App Data")
+3. **Right-click the folder > "Share"**
+4. **Add the service account email** (found in the JSON file as `client_email`)
+5. **Set permission to "Editor"**
+6. **Click "Send"**
+7. **Copy the folder ID** from the URL (the long string after `/folders/`)
+
+#### **Step B4: Extract Credentials from JSON**
+
+1. **Open the downloaded JSON file**
+2. **Find these values**:
+   - `client_email` → This is your service account email
+   - `private_key` → This is your private key
+   - `project_id` → Your Google Cloud project ID
+
+#### **Step B5: Configure Environment Variables**
+
+Instead of OAuth credentials, use these environment variables:
+
+```bash
+GOOGLE_SERVICE_ACCOUNT_EMAIL=your-service-account@project.iam.gserviceaccount.com
+GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYOUR_PRIVATE_KEY_HERE\n-----END PRIVATE KEY-----\n"
+GOOGLE_FOLDER_ID=your_folder_id_here
+```
+
+**Important Notes**:
+- The private key should include the `\n` characters as shown above
+- The private key should be wrapped in quotes
+- Make sure to include the full private key including `-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----`
+
+#### **Step B6: Example JSON Structure**
+
+Your downloaded JSON file should look like this:
+
+```json
+{
+  "type": "service_account",
+  "project_id": "your-project-id",
+  "private_key_id": "key-id",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nYOUR_PRIVATE_KEY\n-----END PRIVATE KEY-----\n",
+  "client_email": "phototag-storage@your-project.iam.gserviceaccount.com",
+  "client_id": "client-id",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/phototag-storage%40your-project.iam.gserviceaccount.com"
+}
+```
+
+**Extract**:
+- `client_email` → `GOOGLE_SERVICE_ACCOUNT_EMAIL`
+- `private_key` → `GOOGLE_PRIVATE_KEY`
+
+## 🤔 **Which Method Should I Use?**
+
+### **OAuth Method (Option A)**
+- ✅ **Pros**: More secure, user-specific access
+- ❌ **Cons**: Requires OAuth consent screen setup, test users configuration
+- 🎯 **Best for**: Production apps with many users
+
+### **Service Account Method (Option B) - RECOMMENDED**
+- ✅ **Pros**: Easier setup, no OAuth consent screen needed, server-to-server
+- ✅ **Cons**: Less secure (shared credentials), but fine for this use case
+- 🎯 **Best for**: Personal projects, internal tools, quick setup
+
+**For your Photo Tag app, we recommend the Service Account method** because:
+- No OAuth consent screen configuration needed
+- No test users to manage
+- Simpler setup process
+- Perfect for a photo tagging application
 
 ## 📋 **Step 3: Get Refresh Token**
 

@@ -5,6 +5,9 @@ interface GoogleDriveConfig {
   clientSecret: string;
   refreshToken: string;
   folderId: string;
+  // Service account credentials
+  serviceAccountEmail: string;
+  privateKey: string;
 }
 
 class GoogleDriveStorage {
@@ -19,6 +22,8 @@ class GoogleDriveStorage {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
       refreshToken: process.env.GOOGLE_REFRESH_TOKEN || '',
       folderId: process.env.GOOGLE_FOLDER_ID || '',
+      serviceAccountEmail: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || '',
+      privateKey: process.env.GOOGLE_PRIVATE_KEY || '',
     };
 
     // Only initialize if we have all required credentials
@@ -28,24 +33,47 @@ class GoogleDriveStorage {
   }
 
   private isConfigured(): boolean {
-    return !!(
+    // Check for OAuth credentials
+    const hasOAuth = !!(
       this.config.clientId &&
       this.config.clientSecret &&
       this.config.refreshToken &&
       this.config.folderId
     );
+    
+    // Check for service account credentials
+    const hasServiceAccount = !!(
+      this.config.serviceAccountEmail &&
+      this.config.privateKey &&
+      this.config.folderId
+    );
+    
+    return hasOAuth || hasServiceAccount;
   }
 
   private initializeAuth() {
-    this.auth = new google.auth.OAuth2(
-      this.config.clientId,
-      this.config.clientSecret,
-      'urn:ietf:wg:oauth:2.0:oob'
-    );
+    // Check if we have service account credentials
+    if (this.config.serviceAccountEmail && this.config.privateKey) {
+      // Use service account authentication
+      this.auth = new google.auth.GoogleAuth({
+        credentials: {
+          client_email: this.config.serviceAccountEmail,
+          private_key: this.config.privateKey,
+        },
+        scopes: ['https://www.googleapis.com/auth/drive.file'],
+      });
+    } else {
+      // Use OAuth2 authentication
+      this.auth = new google.auth.OAuth2(
+        this.config.clientId,
+        this.config.clientSecret,
+        'urn:ietf:wg:oauth:2.0:oob'
+      );
 
-    this.auth.setCredentials({
-      refresh_token: this.config.refreshToken,
-    });
+      this.auth.setCredentials({
+        refresh_token: this.config.refreshToken,
+      });
+    }
 
     this.drive = google.drive({ version: 'v3', auth: this.auth });
   }
