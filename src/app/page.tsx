@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import Image from "next/image";
-import { X, User, Star, Eye } from 'lucide-react';
+import { X, User, Sun, Eye } from 'lucide-react';
 
 interface Tag {
   id: string;
@@ -121,7 +121,7 @@ export default function Home() {
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
-    if (firstName.trim() && lastName.trim() && vinculo && yearIngreso.trim()) {
+    if (firstName.trim() && lastName.trim() && vinculo) {
       setIsSubmitting(true);
       try {
         const newTag: Tag = {
@@ -131,7 +131,7 @@ export default function Home() {
           firstName: firstName.trim(),
           lastName: lastName.trim(),
           vinculo: vinculo,
-          yearIngreso: yearIngreso.trim(),
+          yearIngreso: yearIngreso.trim() || 'No especificado',
         };
         const updatedTags = [...tags, newTag];
         setTags(updatedTags);
@@ -164,12 +164,12 @@ export default function Home() {
 
   const handleEditSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
-    if (firstName.trim() && lastName.trim() && vinculo && yearIngreso.trim() && editingTag) {
+    if (firstName.trim() && lastName.trim() && vinculo && editingTag) {
       setIsSubmitting(true);
       try {
         const updatedTags = tags.map(tag => 
           tag.id === editingTag 
-            ? { ...tag, firstName: firstName.trim(), lastName: lastName.trim(), vinculo: vinculo, yearIngreso: yearIngreso.trim() }
+            ? { ...tag, firstName: firstName.trim(), lastName: lastName.trim(), vinculo: vinculo, yearIngreso: yearIngreso.trim() || 'No especificado' }
             : tag
         );
         setTags(updatedTags);
@@ -343,13 +343,15 @@ export default function Home() {
   const getStarColor = useCallback((vinculo: string) => {
     switch (vinculo) {
       case 'Docente':
-        return 'text-blue-500 fill-blue-500';
+        return 'text-blue-500 fill-blue-500 stroke-black stroke-1';
       case 'Estudiante':
-        return 'text-yellow-500 fill-yellow-500';
+        return 'text-yellow-500 fill-yellow-500 stroke-black stroke-1';
       case 'Egresad@':
-        return 'text-red-500 fill-red-500';
+        return 'text-red-500 fill-red-500 stroke-black stroke-1';
+      case 'Administración':
+        return 'text-green-500 fill-green-500 stroke-black stroke-1';
       default:
-        return 'text-yellow-400 fill-yellow-400';
+        return 'text-yellow-400 fill-yellow-400 stroke-black stroke-1';
     }
   }, []);
 
@@ -431,23 +433,23 @@ export default function Home() {
                 }}
               >
                 {/* Star marker */}
-                <div className="relative">
-                  <Star 
-                    size={24} 
-                    className={`${getStarColor(tag.vinculo)} drop-shadow-lg ${isViewOnly || isMobile ? 'cursor-default' : 'cursor-move'} hover:scale-110 transition-transform ${
-                      draggedTag === tag.id ? 'scale-125 shadow-xl' : ''
-                    }`}
-                    onMouseDown={(e) => handleDragStart(e, tag.id)}
-                    onDoubleClick={(e) => {
-                      e.stopPropagation();
-                      if (!isViewOnly && !isMobile) {
-                        removeTag(tag.id);
-                      }
-                    }}
-                  />
+                        <div className="relative">
+                          <Sun 
+                            size={12} 
+                            className={`${getStarColor(tag.vinculo)} drop-shadow-lg ${isViewOnly || isMobile ? 'cursor-default' : 'cursor-move'} hover:scale-110 transition-transform ${
+                              draggedTag === tag.id ? 'scale-125 shadow-xl' : ''
+                            }`}
+                            onMouseDown={(e) => handleDragStart(e, tag.id)}
+                            onDoubleClick={(e) => {
+                              e.stopPropagation();
+                              if (!isViewOnly && !isMobile) {
+                                removeTag(tag.id);
+                              }
+                            }}
+                          />
                   
-                  {/* Tooltip with name */}
-                  <div className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 transition-opacity duration-200 pointer-events-none ${
+                  {/* Tooltip with name and vínculo */}
+                  <div className={`absolute top-full left-1/2 transform -translate-x-1/2 mt-2 transition-opacity duration-200 pointer-events-none ${
                     !isDragging && !justFinishedDragging ? 'opacity-0 group-hover:opacity-100' : 'opacity-0'
                   }`}>
                     <div className="bg-gray-900 text-white px-3 py-2 rounded-lg shadow-lg text-sm font-medium whitespace-nowrap relative">
@@ -455,8 +457,11 @@ export default function Home() {
                         <User size={14} />
                         <span>{tag.firstName} {tag.lastName}</span>
                       </div>
-                      {/* Arrow pointing down */}
-                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+                      <div className="text-xs text-gray-300 mt-1">
+                        {tag.vinculo}
+                      </div>
+                      {/* Arrow pointing up */}
+                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-gray-900"></div>
                     </div>
                   </div>
                 </div>
@@ -516,24 +521,24 @@ export default function Home() {
                     <option value="Docente">Docente</option>
                     <option value="Estudiante">Estudiante</option>
                     <option value="Egresad@">Egresad@</option>
+                    <option value="Administración">Administración</option>
                   </select>
                 </div>
-                <div className="mb-6">
-                  <label htmlFor="yearIngreso" className="block text-sm font-medium text-gray-700 mb-2">
-                    Año de ingreso al pregrado
-                  </label>
-                  <input
-                    type="number"
-                    id="yearIngreso"
-                    value={yearIngreso}
-                    onChange={(e) => setYearIngreso(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Ej: 2020"
-                    min="1900"
-                    max="2030"
-                    required
-                  />
-                </div>
+                        <div className="mb-6">
+                          <label htmlFor="yearIngreso" className="block text-sm font-medium text-gray-700 mb-2">
+                            Año de ingreso al pregrado (opcional)
+                          </label>
+                          <input
+                            type="number"
+                            id="yearIngreso"
+                            value={yearIngreso}
+                            onChange={(e) => setYearIngreso(e.target.value)}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Ej: 2020"
+                            min="1900"
+                            max="2030"
+                          />
+                        </div>
                 <div className="flex gap-3">
                   <button
                     type="submit"
@@ -571,21 +576,31 @@ export default function Home() {
           </div>
         )}
 
-        {/* Tags summary - Hidden in view-only mode */}
-        {!isViewOnly && tags.length > 0 && (
-          <div className="mt-8 max-w-6xl mx-auto">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-              Personas Etiquetadas ({tags.length})
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {memoizedTags.map((tag) => (
+                {/* Tags summary - Hidden in view-only mode */}
+                {!isViewOnly && tags.length > 0 && (
+                  <div className="mt-8 max-w-6xl mx-auto">
+                    <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+                      Personas Etiquetadas ({tags.length})
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {memoizedTags
+                        .sort((a, b) => {
+                          const nameA = `${a.firstName} ${a.lastName}`.toLowerCase();
+                          const nameB = `${b.firstName} ${b.lastName}`.toLowerCase();
+                          return nameA.localeCompare(nameB);
+                        })
+                        .map((tag) => (
                 <div key={tag.id} className="bg-white p-4 rounded-lg shadow border">
                   <div className="flex items-center gap-2 mb-2">
                     <User size={20} className="text-blue-600" />
                     <span className="font-medium">{tag.firstName} {tag.lastName}</span>
                   </div>
                   <div className="text-sm text-gray-600 space-y-1 mb-3">
-                    <div><span className="font-medium">Vínculo:</span> {tag.vinculo}</div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium">Vínculo:</span> 
+                      <Sun size={16} className={getStarColor(tag.vinculo)} />
+                      <span>{tag.vinculo}</span>
+                    </div>
                     <div><span className="font-medium">Año de ingreso:</span> {tag.yearIngreso}</div>
                   </div>
                   <div className="flex gap-2 text-xs">
@@ -659,7 +674,7 @@ export default function Home() {
         {/* Footer */}
         <footer className="mt-12 text-center">
           <p className="text-sm text-gray-500">
-            <i>Desarrollado por Jorge I. Zuluaga (Astronomía, UdeA) con la asistencia de Cursor (2025) v0.2.0</i>
+            <i>Desarrollado por Jorge I. Zuluaga (Astronomía, UdeA) con la asistencia de Cursor (2025) v0.3.0</i>
             {isViewOnly && (
               <span className="block mt-1 text-xs text-blue-600">
                 <Eye className="w-3 h-3 inline mr-1" />
