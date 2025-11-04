@@ -36,6 +36,47 @@ class GoogleDriveStorage {
     }
   }
 
+  // Expose minimal debug information safely (no secrets)
+  public async debugStatus(): Promise<{ 
+    isServiceAccountConfigured: boolean; 
+    isOAuthConfigured: boolean; 
+    folderIdSet: boolean; 
+    authType: 'service_account' | 'oauth' | 'none';
+    accessTokenOk: boolean; 
+    message?: string;
+  }> {
+    const sa = this.isServiceAccountConfigured();
+    const oa = this.isOAuthConfigured();
+    const authType = sa ? 'service_account' : (oa ? 'oauth' : 'none');
+    let accessTokenOk = false;
+    let message: string | undefined;
+    try {
+      if (this.auth && typeof this.auth.getAccessToken === 'function') {
+        const tokenResp = await this.auth.getAccessToken();
+        if (typeof tokenResp === 'string') {
+          accessTokenOk = tokenResp.length > 0;
+        } else if (tokenResp && typeof tokenResp === 'object') {
+          const token = (tokenResp as any).token || (tokenResp as any).access_token;
+          accessTokenOk = !!token;
+        }
+      } else if (this.auth && typeof this.auth.authorize === 'function') {
+        await this.auth.authorize();
+        accessTokenOk = true;
+      }
+    } catch (e: any) {
+      message = e?.response?.data || e?.message || String(e);
+    }
+
+    return {
+      isServiceAccountConfigured: sa,
+      isOAuthConfigured: oa,
+      folderIdSet: !!this.config.folderId,
+      authType,
+      accessTokenOk,
+      message,
+    };
+  }
+
   private isConfigured(): boolean {
     return this.isServiceAccountConfigured() || this.isOAuthConfigured();
   }
