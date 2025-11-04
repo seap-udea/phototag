@@ -243,6 +243,14 @@ Original error: ${typeof createMsg === 'string' ? createMsg : JSON.stringify(cre
       console.log('Loading tags from Google Drive...', { folderId: this.config.folderId });
       
       if (!this.fileId) {
+        // Use fixed file ID if provided
+        if (this.config.fixedFileId) {
+          this.fileId = this.config.fixedFileId;
+          console.log('Using fixed Google Drive file ID for load:', this.fileId);
+        }
+      }
+
+      if (!this.fileId) {
         // Try to find existing file
         console.log('Searching for existing file in Google Drive...');
         const response = await this.drive.files.list({
