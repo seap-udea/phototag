@@ -114,16 +114,13 @@ class GoogleDriveStorage {
 
   private initializeAuth() {
     if (this.isServiceAccountConfigured()) {
-      // Prefer Service Account when available
-      const scopes = ['https://www.googleapis.com/auth/drive.file'];
-      this.auth = new google.auth.JWT(
-        this.config.serviceAccountEmail,
-        undefined,
-        this.config.serviceAccountPrivateKey,
-        scopes
-      );
-      // Ensure we actually obtain an access token before using the client
-      // Some environments require an explicit authorize() call
+      // Prefer Service Account when available (object-based constructor)
+      this.auth = new google.auth.JWT({
+        email: this.config.serviceAccountEmail,
+        key: this.config.serviceAccountPrivateKey,
+        scopes: ['https://www.googleapis.com/auth/drive.file'],
+      });
+      // Ensure we obtain an access token before using the client
       this.auth.authorize().catch((e: any) => {
         console.error('Service Account authorize() failed:', e?.response?.data || e?.message || e);
       });
