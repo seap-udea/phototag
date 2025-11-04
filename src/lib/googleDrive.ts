@@ -67,6 +67,22 @@ class GoogleDriveStorage {
 
       const jsonString = JSON.stringify(dataToSave, null, 2);
 
+      if (!this.fileId) {
+        // Attempt to find existing file first to avoid duplicates across serverless instances
+        try {
+          const search = await this.drive.files.list({
+            q: `name='phototag-tags.json' and parents in '${this.config.folderId}' and trashed=false`,
+            fields: 'files(id, name)',
+          });
+          if (search.data.files && search.data.files.length > 0) {
+            this.fileId = search.data.files[0].id;
+            console.log('Found existing file to update:', this.fileId);
+          }
+        } catch (searchError) {
+          console.warn('Could not search for existing file before save, will fallback to create:', searchError);
+        }
+      }
+
       if (this.fileId) {
         // Update existing file
         await this.drive.files.update({
