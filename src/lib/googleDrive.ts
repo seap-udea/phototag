@@ -19,14 +19,27 @@ class GoogleDriveStorage {
   private fileId: string | null = null;
 
   constructor() {
+    // Prefer base64 private key env to avoid newline escaping issues
+    const saKeyBase64 = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY_BASE64 || process.env.GOOGLE_SA_PRIVATE_KEY_BASE64 || '';
+    let saKey = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY || process.env.GOOGLE_SA_PRIVATE_KEY || '';
+    if (saKeyBase64) {
+      try {
+        saKey = Buffer.from(saKeyBase64, 'base64').toString('utf8');
+      } catch {}
+    }
+    // Normalize quotes and newlines
+    saKey = saKey.trim();
+    if ((saKey.startsWith('"') && saKey.endsWith('"')) || (saKey.startsWith("'") && saKey.endsWith("'"))) {
+      saKey = saKey.slice(1, -1);
+    }
+    saKey = saKey.replace(/\\n/g, '\n');
+
     this.config = {
       clientId: process.env.GOOGLE_CLIENT_ID || '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
       refreshToken: process.env.GOOGLE_REFRESH_TOKEN || '',
       serviceAccountEmail: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || process.env.GOOGLE_SA_EMAIL || '',
-      serviceAccountPrivateKey: (process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY || process.env.GOOGLE_SA_PRIVATE_KEY || '')
-        // Render and many hosts store newlines escaped; fix formatting
-        .replace(/\\n/g, '\n'),
+      serviceAccountPrivateKey: saKey,
       folderId: process.env.GOOGLE_FOLDER_ID || '',
     };
 
@@ -81,6 +94,8 @@ class GoogleDriveStorage {
       diagnostics: {
         saEmailPresent: !!this.config.serviceAccountEmail,
         saKeyLength: this.config.serviceAccountPrivateKey ? this.config.serviceAccountPrivateKey.length : 0,
+        saKeyStartsWithBegin: this.config.serviceAccountPrivateKey ? this.config.serviceAccountPrivateKey.includes('-----BEGIN PRIVATE KEY-----') : false,
+        saKeyEndsWithEnd: this.config.serviceAccountPrivateKey ? this.config.serviceAccountPrivateKey.trim().endsWith('-----END PRIVATE KEY-----') : false,
       }
     };
   }
