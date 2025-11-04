@@ -1,9 +1,14 @@
 import { google } from 'googleapis';
 
 interface GoogleDriveConfig {
+  // OAuth (legacy)
   clientId: string;
   clientSecret: string;
   refreshToken: string;
+  // Service Account
+  serviceAccountEmail: string;
+  serviceAccountPrivateKey: string;
+  // Common
   folderId: string;
 }
 
@@ -18,6 +23,10 @@ class GoogleDriveStorage {
       clientId: process.env.GOOGLE_CLIENT_ID || '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
       refreshToken: process.env.GOOGLE_REFRESH_TOKEN || '',
+      serviceAccountEmail: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || process.env.GOOGLE_SA_EMAIL || '',
+      serviceAccountPrivateKey: (process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY || process.env.GOOGLE_SA_PRIVATE_KEY || '')
+        // Render and many hosts store newlines escaped; fix formatting
+        .replace(/\\n/g, '\n'),
       folderId: process.env.GOOGLE_FOLDER_ID || '',
     };
 
@@ -28,26 +37,46 @@ class GoogleDriveStorage {
   }
 
   private isConfigured(): boolean {
-    return !!(
-      this.config.clientId &&
-      this.config.clientSecret &&
-      this.config.refreshToken &&
-      this.config.folderId
-    );
+    return this.isServiceAccountConfigured() || this.isOAuthConfigured();
+  }
+
+  private isServiceAccountConfigured(): boolean {
+    return !!(this.config.serviceAccountEmail && this.config.serviceAccountPrivateKey && this.config.folderId);
+  }
+
+  private isOAuthConfigured(): boolean {
+    return !!(this.config.clientId && this.config.clientSecret && this.config.refreshToken && this.config.folderId);
   }
 
   private initializeAuth() {
-    this.auth = new google.auth.OAuth2(
-      this.config.clientId,
-      this.config.clientSecret,
-      'urn:ietf:wg:oauth:2.0:oob'
-    );
+    if (this.isServiceAccountConfigured()) {
+      // Prefer Service Account when available
+      const scopes = ['https://www.googleapis.com/auth/drive.file'];
+      this.auth = new google.auth.JWT(
+        this.config.serviceAccountEmail,
+        undefined,
+        this.config.serviceAccountPrivateKey,
+        scopes
+      );
+      this.drive = google.drive({ version: 'v3', auth: this.auth });
+      console.log('Initialized Google Drive with Service Account');
+    } else if (this.isOAuthConfigured()) {
+      // Fallback to OAuth client credentials
+      this.auth = new google.auth.OAuth2(
+        this.config.clientId,
+        this.config.clientSecret,
+        'urn:ietf:wg:oauth:2.0:oob'
+      );
 
-    this.auth.setCredentials({
-      refresh_token: this.config.refreshToken,
-    });
+      this.auth.setCredentials({
+        refresh_token: this.config.refreshToken,
+      });
 
-    this.drive = google.drive({ version: 'v3', auth: this.auth });
+      this.drive = google.drive({ version: 'v3', auth: this.auth });
+      console.log('Initialized Google Drive with OAuth client');
+    } else {
+      throw new Error('Google Drive not configured');
+    }
   }
 
   async saveTags(tags: any[]): Promise<boolean> {
