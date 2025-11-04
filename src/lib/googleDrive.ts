@@ -10,6 +10,7 @@ interface GoogleDriveConfig {
   serviceAccountPrivateKey: string;
   // Common
   folderId: string;
+  fixedFileId?: string; // Optional: existing file to update
 }
 
 class GoogleDriveStorage {
@@ -41,6 +42,7 @@ class GoogleDriveStorage {
       serviceAccountEmail: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || process.env.GOOGLE_SA_EMAIL || '',
       serviceAccountPrivateKey: saKey,
       folderId: process.env.GOOGLE_FOLDER_ID || '',
+      fixedFileId: process.env.GOOGLE_DRIVE_FILE_ID || process.env.GOOGLE_FILE_ID || undefined,
     };
 
     // Only initialize if we have all required credentials
@@ -163,6 +165,14 @@ class GoogleDriveStorage {
       const jsonString = JSON.stringify(dataToSave, null, 2);
 
       if (!this.fileId) {
+        // Prefer fixed file ID when provided (shared by a human account)
+        if (this.config.fixedFileId) {
+          this.fileId = this.config.fixedFileId;
+          console.log('Using fixed Google Drive file ID for updates:', this.fileId);
+        }
+      }
+
+      if (!this.fileId) {
         // Attempt to find existing file first to avoid duplicates across serverless instances
         try {
           const search = await this.drive.files.list({
@@ -188,19 +198,28 @@ class GoogleDriveStorage {
           },
         });
       } else {
-        // Create new file
-        const response = await this.drive.files.create({
-          requestBody: {
-            name: 'phototag-tags.json',
-            parents: [this.config.folderId],
-          },
-          media: {
-            mimeType: 'application/json',
-            body: jsonString,
-          },
-        });
-        this.fileId = response.data.id;
-        console.log('File created in Google Drive:', this.fileId);
+        // Create new file – may fail for Service Accounts without shared drive quota
+        try {
+          const response = await this.drive.files.create({
+            requestBody: {
+              name: 'phototag-tags.json',
+              parents: [this.config.folderId],
+            },
+            media: {
+              mimeType: 'application/json',
+              body: jsonString,
+            },
+          });
+          this.fileId = response.data.id;
+          console.log('File created in Google Drive:', this.fileId);
+        } catch (createErr: any) {
+          // Surface clear guidance for SA quota limitations
+          const createMsg = createErr?.response?.data || createErr?.message || String(createErr);
+          throw new Error(`Drive create failed. If using a Service Account, either:
+ - Use a Shared Drive and add the Service Account as Content manager, or
+ - Create an empty phototag-tags.json in your Drive, share with the Service Account (Editor), and set GOOGLE_DRIVE_FILE_ID to its ID.
+Original error: ${typeof createMsg === 'string' ? createMsg : JSON.stringify(createMsg)}`);
+        }
       }
 
       console.log('Successfully saved to Google Drive');
