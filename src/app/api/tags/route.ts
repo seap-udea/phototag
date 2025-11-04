@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     }
 
     const success = await driveStorage.saveTags(tags);
-    
+
     if (success) {
       return NextResponse.json({ 
         success: true, 
@@ -39,15 +39,14 @@ export async function POST(request: NextRequest) {
         lastUpdated: new Date().toISOString()
       });
     } else {
-      return NextResponse.json(
-        { success: false, error: 'Failed to save tags to Google Drive' },
-        { status: 500 }
-      );
+      // This path is unlikely now; saveTags throws on Drive errors
+      return NextResponse.json({ success: false, error: 'Failed to save tags to Google Drive' }, { status: 500 });
     }
   } catch (error) {
     console.error('Error saving tags to Google Drive:', error);
+    const message = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { success: false, error: 'Failed to save tags to Google Drive' },
+      { success: false, error: message },
       { status: 500 }
     );
   }
