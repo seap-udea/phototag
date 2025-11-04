@@ -142,7 +142,8 @@ class GoogleDriveStorage {
     } catch (error: any) {
       const details = error?.response?.data || error?.message || error;
       console.error('Error saving to Google Drive:', details);
-      return this.fallbackSave(tags);
+      // Drive is configured but failed; signal failure so API can report it
+      return false;
     }
   }
 
