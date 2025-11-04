@@ -44,6 +44,10 @@ class GoogleDriveStorage {
     authType: 'service_account' | 'oauth' | 'none';
     accessTokenOk: boolean; 
     message?: string;
+    diagnostics?: {
+      saEmailPresent: boolean;
+      saKeyLength: number;
+    }
   }> {
     const sa = this.isServiceAccountConfigured();
     const oa = this.isOAuthConfigured();
@@ -74,6 +78,10 @@ class GoogleDriveStorage {
       authType,
       accessTokenOk,
       message,
+      diagnostics: {
+        saEmailPresent: !!this.config.serviceAccountEmail,
+        saKeyLength: this.config.serviceAccountPrivateKey ? this.config.serviceAccountPrivateKey.length : 0,
+      }
     };
   }
 
