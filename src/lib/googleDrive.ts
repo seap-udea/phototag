@@ -110,8 +110,9 @@ class GoogleDriveStorage {
 
       console.log('Successfully saved to Google Drive');
       return true;
-    } catch (error) {
-      console.error('Error saving to Google Drive:', error);
+    } catch (error: any) {
+      const details = error?.response?.data || error?.message || error;
+      console.error('Error saving to Google Drive:', details);
       return this.fallbackSave(tags);
     }
   }
@@ -170,8 +171,9 @@ class GoogleDriveStorage {
       
       // Handle both old format (array) and new format (object with tags property)
       return Array.isArray(parsedData) ? parsedData : parsedData.tags || [];
-    } catch (error) {
-      console.error('Error loading from Google Drive:', error);
+    } catch (error: any) {
+      const details = error?.response?.data || error?.message || error;
+      console.error('Error loading from Google Drive:', details);
       return this.fallbackLoad();
     }
   }
