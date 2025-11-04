@@ -584,6 +584,7 @@ export default function Home() {
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {memoizedTags
+                        .slice()
                         .sort((a, b) => {
                           const nameA = `${a.firstName} ${a.lastName}`.toLowerCase();
                           const nameB = `${b.firstName} ${b.lastName}`.toLowerCase();
