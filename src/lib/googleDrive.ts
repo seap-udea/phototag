@@ -58,6 +58,11 @@ class GoogleDriveStorage {
         this.config.serviceAccountPrivateKey,
         scopes
       );
+      // Ensure we actually obtain an access token before using the client
+      // Some environments require an explicit authorize() call
+      this.auth.authorize().catch((e: any) => {
+        console.error('Service Account authorize() failed:', e?.response?.data || e?.message || e);
+      });
       this.drive = google.drive({ version: 'v3', auth: this.auth });
       console.log('Initialized Google Drive with Service Account');
     } else if (this.isOAuthConfigured()) {
