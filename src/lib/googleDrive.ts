@@ -42,7 +42,7 @@ class GoogleDriveStorage {
       serviceAccountEmail: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || process.env.GOOGLE_SA_EMAIL || '',
       serviceAccountPrivateKey: saKey,
       folderId: process.env.GOOGLE_FOLDER_ID || '',
-      fixedFileId: process.env.GOOGLE_DRIVE_FILE_ID || process.env.GOOGLE_FILE_ID || undefined,
+      fixedFileId: (process.env.GOOGLE_DRIVE_FILE_ID || process.env.GOOGLE_FILE_ID || '').trim() || undefined,
     };
 
     // Only initialize if we have all required credentials
