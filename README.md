@@ -143,19 +143,29 @@ You can generate a standalone HTML file that can be opened directly in any brows
    - Set up your `.env.local` file with Google Drive credentials
    - See `GOOGLE_DRIVE_SETUP.md` for detailed instructions
 
-2. **Run the generation script**:
+2. **Configure image source (optional)**:
+   - To use an image from Google Drive (recommended), set the environment variable:
+     ```bash
+     GOOGLE_DRIVE_IMAGE_URL=https://drive.google.com/file/d/FILE_ID/view
+     ```
+   - Or add it to your `.env.local` file
+   - The image must be publicly accessible (set to "Anyone with the link can view")
+   - If not set, the script will use the local image file
+
+3. **Run the generation script**:
    ```bash
    npm run generate-static-html
    ```
 
-3. **Output files**:
+4. **Output files**:
    - `phototag.html` - The standalone HTML file with the photo and tags
-   - `pregrado-astronomia-2025.jpg` - The image file (copied to the same directory)
+   - `pregrado-astronomia-2025.jpg` - The image file (only copied if using local image)
 
-4. **Share the files**:
-   - Both files need to be in the same directory
+5. **Share the file**:
+   - If using Google Drive image: Only `phototag.html` is needed (works without local files)
+   - If using local image: Both `phototag.html` and `pregrado-astronomia-2025.jpg` must be in the same directory
    - Open `phototag.html` in any web browser
-   - The file is completely self-contained and works offline
+   - The file works completely offline (if using local image) or with internet connection (if using Google Drive)
 
 ### Features of the Static HTML
 

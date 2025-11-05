@@ -52,7 +52,39 @@ function getStarColor(vinculo: string): string {
   }
 }
 
-function generateHTML(tags: Tag[]): string {
+function convertGoogleDriveUrlToDirect(url: string): string {
+  // Extract file ID from Google Drive URL
+  // Supports formats like:
+  // - https://drive.google.com/file/d/FILE_ID/view
+  // - https://drive.google.com/open?id=FILE_ID
+  // - https://drive.google.com/file/d/FILE_ID/edit
+  
+  let fileId = '';
+  
+  // Extract from /file/d/FILE_ID/ format
+  const fileIdMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (fileIdMatch) {
+    fileId = fileIdMatch[1];
+  } else {
+    // Extract from ?id=FILE_ID format
+    const idMatch = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    if (idMatch) {
+      fileId = idMatch[1];
+    }
+  }
+  
+  if (fileId) {
+    // Return direct image URL
+    return `https://drive.google.com/uc?export=view&id=${fileId}`;
+  }
+  
+  // If we can't extract the ID, return the original URL
+  return url;
+}
+
+function generateHTML(tags: Tag[], imageUrl?: string): string {
+  // Use Google Drive URL if provided, otherwise use local image
+  const imgSrc = imageUrl ? convertGoogleDriveUrlToDirect(imageUrl) : 'pregrado-astronomia-2025.jpg';
   const sunsHTML = tags.map(tag => {
     const color = getStarColor(tag.vinculo);
     const name = `${tag.firstName} ${tag.lastName}`.trim();
@@ -214,7 +246,7 @@ function generateHTML(tags: Tag[]): string {
     </div>
     
     <div class="image-container">
-      <img src="pregrado-astronomia-2025.jpg" alt="Foto del cumpleaños 16 del pregrado de astronomía 2025" />
+      <img src="${imgSrc}" alt="Foto del cumpleaños 16 del pregrado de astronomía 2025" />
       <div class="suns-wrapper">
         ${sunsHTML}
       </div>
@@ -243,7 +275,18 @@ async function main() {
     }
     
     console.log('Generando HTML estático...');
-    const html = generateHTML(tags);
+    
+    // Get Google Drive image URL from environment variable or use default
+    const googleDriveImageUrl = process.env.GOOGLE_DRIVE_IMAGE_URL || process.env.GOOGLE_IMAGE_URL || '';
+    const html = generateHTML(tags, googleDriveImageUrl || undefined);
+    
+    if (googleDriveImageUrl) {
+      console.log(`✓ Usando imagen desde Google Drive: ${googleDriveImageUrl}`);
+    } else {
+      console.log(`⚠️  No se configuró GOOGLE_DRIVE_IMAGE_URL, usando imagen local`);
+      console.log(`   Para usar imagen desde Google Drive, configura la variable de entorno:`);
+      console.log(`   GOOGLE_DRIVE_IMAGE_URL=https://drive.google.com/file/d/FILE_ID/view`);
+    }
     
     const outputPath = path.join(process.cwd(), 'phototag.html');
     fs.writeFileSync(outputPath, html, 'utf8');
@@ -254,19 +297,29 @@ async function main() {
     fs.writeFileSync(publicPath, html, 'utf8');
     console.log(`✓ HTML copiado a public/: ${publicPath}`);
     
-    // Copy the image file to the same directory as the HTML
-    const imageSource = path.join(process.cwd(), 'public', 'pregrado-astronomia-2025.jpg');
-    const imageDest = path.join(process.cwd(), 'pregrado-astronomia-2025.jpg');
-    
-    if (fs.existsSync(imageSource)) {
-      fs.copyFileSync(imageSource, imageDest);
-      console.log(`✓ Imagen copiada: ${imageDest}`);
+    // Only copy local image if not using Google Drive URL
+    if (!googleDriveImageUrl) {
+      const imageSource = path.join(process.cwd(), 'public', 'pregrado-astronomia-2025.jpg');
+      const imageDest = path.join(process.cwd(), 'pregrado-astronomia-2025.jpg');
+      
+      if (fs.existsSync(imageSource)) {
+        fs.copyFileSync(imageSource, imageDest);
+        console.log(`✓ Imagen local copiada: ${imageDest}`);
+      } else {
+        console.warn(`⚠️  Imagen local no encontrada en ${imageSource}`);
+        console.warn(`   Asegúrate de copiar 'pregrado-astronomia-2025.jpg' al mismo directorio que el HTML`);
+        console.warn(`   O configura GOOGLE_DRIVE_IMAGE_URL para usar imagen desde Google Drive`);
+      }
     } else {
-      console.warn(`⚠️  Imagen no encontrada en ${imageSource}`);
-      console.warn(`   Asegúrate de copiar 'pregrado-astronomia-2025.jpg' al mismo directorio que el HTML`);
+      console.log(`✓ Imagen se carga desde Google Drive, no se necesita archivo local`);
     }
     
     console.log(`\n📝 El archivo HTML está listo para compartir.`);
+    if (googleDriveImageUrl) {
+      console.log(`   - El HTML funciona sin archivos adicionales (imagen desde Google Drive)`);
+    } else {
+      console.log(`   - Asegúrate de tener 'pregrado-astronomia-2025.jpg' en el mismo directorio`);
+    }
     console.log(`   - Abre phototag.html directamente en cualquier navegador`);
     console.log(`   - O descárgalo desde la aplicación web usando el enlace\n`);
     
