@@ -167,8 +167,8 @@ class GoogleDriveStorage {
       if (!this.fileId) {
         // Prefer fixed file ID when provided (shared by a human account)
         if (this.config.fixedFileId) {
-          this.fileId = this.config.fixedFileId;
-          console.log('Using fixed Google Drive file ID for updates:', this.fileId);
+          this.fileId = this.config.fixedFileId.trim();
+          console.log('Using fixed Google Drive file ID for updates:', this.fileId, 'Length:', this.fileId.length);
         }
       }
 
@@ -245,8 +245,35 @@ Original error: ${typeof createMsg === 'string' ? createMsg : JSON.stringify(cre
       if (!this.fileId) {
         // Use fixed file ID if provided
         if (this.config.fixedFileId) {
-          this.fileId = this.config.fixedFileId;
-          console.log('Using fixed Google Drive file ID for load:', this.fileId);
+          this.fileId = this.config.fixedFileId.trim();
+          console.log('Using fixed Google Drive file ID for load:', this.fileId, 'Length:', this.fileId.length, 'First char:', this.fileId.charCodeAt(0), 'Last char:', this.fileId.charCodeAt(this.fileId.length - 1));
+          
+          // Verify file exists and is accessible before trying to load
+          try {
+            const verifyResponse = await this.drive.files.get({
+              fileId: this.fileId,
+              fields: 'id, name, permissions',
+            });
+            console.log('File verified:', { id: verifyResponse.data.id, name: verifyResponse.data.name });
+          } catch (verifyError: any) {
+            const verifyDetails = verifyError?.response?.data || verifyError?.message || verifyError;
+            console.error('File verification failed:', verifyDetails);
+            
+            // Try to list files to see what the Service Account can access
+            try {
+              console.log('Attempting to list accessible files...');
+              const listResponse = await this.drive.files.list({
+                q: `name='phototag-tags.json' and trashed=false`,
+                fields: 'files(id, name, permissions)',
+                pageSize: 10,
+              });
+              console.log('Accessible files:', listResponse.data.files);
+            } catch (listError: any) {
+              console.error('Could not list files:', listError?.response?.data || listError?.message || listError);
+            }
+            
+            throw verifyError;
+          }
         }
       }
 
