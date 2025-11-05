@@ -59,10 +59,10 @@ function generateHTML(tags: Tag[]): string {
           <circle cx="12" cy="12" r="4" fill="${color}" stroke="black" stroke-width="1"/>
           <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
-        <div class="tooltip" style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); margin-top: 8px; opacity: 0; pointer-events: none; transition: opacity 0.2s; background: rgba(0,0,0,0.9); color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 20;">
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
           <div style="font-weight: 600; margin-bottom: 4px;">${escapeHtml(name)}</div>
           ${vinculo ? `<div style="font-size: 12px; color: #e5e7eb;">${escapeHtml(vinculo)}${yearIngreso ? ` (${escapeHtml(yearIngreso)})` : ''}</div>` : ''}
-          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid rgba(0,0,0,0.9);"></div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
         </div>
       </div>
     `;
@@ -83,29 +83,27 @@ function generateHTML(tags: Tag[]): string {
     
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: #f9fafb;
       min-height: 100vh;
       padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
     }
     
     .container {
       max-width: 1200px;
       width: 100%;
+      margin: 0 auto;
       background: white;
-      border-radius: 12px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
       overflow: hidden;
     }
     
     .header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
+      background: white;
+      color: #111827;
       padding: 30px;
       text-align: center;
+      border-bottom: 1px solid #e5e7eb;
     }
     
     .header h1 {
@@ -147,18 +145,30 @@ function generateHTML(tags: Tag[]): string {
     
     .sun-container {
       pointer-events: auto;
+      position: relative;
     }
     
     .sun-container:hover .tooltip {
-      opacity: 1;
+      opacity: 1 !important;
+      visibility: visible !important;
     }
     
     .sun-icon {
       transition: transform 0.2s;
+      pointer-events: auto;
     }
     
     .sun-container:hover .sun-icon {
       transform: scale(1.1);
+    }
+    
+    .tooltip {
+      visibility: hidden;
+    }
+    
+    .tooltip.show {
+      opacity: 1 !important;
+      visibility: visible !important;
     }
     
     .footer {
