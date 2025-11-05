@@ -6,6 +6,12 @@
  * Output: phototag.html
  */
 
+// Load environment variables from .env.local
+import { config } from 'dotenv';
+import { resolve } from 'path';
+
+config({ path: resolve(process.cwd(), '.env.local') });
+
 import GoogleDriveStorage from '../src/lib/googleDrive';
 import * as fs from 'fs';
 import * as path from 'path';
