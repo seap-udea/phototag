@@ -3,7 +3,7 @@
 /**
  * Script to generate a static HTML file with the photo and tags from Google Drive
  * Usage: npm run generate-static-html
- * Output: phototag-astronomia-16.html
+ * Output: phototag.html
  */
 
 import GoogleDriveStorage from '../src/lib/googleDrive';
@@ -83,7 +83,7 @@ function generateHTML(tags: Tag[]): string {
     
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-      background: #f9fafb;
+      background: #33691E;
       min-height: 100vh;
       padding: 20px;
     }
@@ -234,7 +234,7 @@ async function main() {
     console.log('Generando HTML estático...');
     const html = generateHTML(tags);
     
-    const outputPath = path.join(process.cwd(), 'phototag-astronomia-16.html');
+    const outputPath = path.join(process.cwd(), 'phototag.html');
     fs.writeFileSync(outputPath, html, 'utf8');
     
     // Copy the image file to the same directory as the HTML

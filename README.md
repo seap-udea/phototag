@@ -128,6 +128,51 @@ Some potential enhancements:
 - Tag categories or colors
 - Undo/redo functionality
 
+## Generating Static HTML File
+
+You can generate a standalone HTML file that can be opened directly in any browser without a server. This is useful for sharing the photo with tags offline.
+
+### Prerequisites
+
+- Google Drive API configured (see `GOOGLE_DRIVE_SETUP.md`)
+- Tags already saved in Google Drive
+
+### Steps
+
+1. **Ensure Google Drive is configured**:
+   - Set up your `.env.local` file with Google Drive credentials
+   - See `GOOGLE_DRIVE_SETUP.md` for detailed instructions
+
+2. **Run the generation script**:
+   ```bash
+   npm run generate-static-html
+   ```
+
+3. **Output files**:
+   - `phototag.html` - The standalone HTML file with the photo and tags
+   - `pregrado-astronomia-2025.jpg` - The image file (copied to the same directory)
+
+4. **Share the files**:
+   - Both files need to be in the same directory
+   - Open `phototag.html` in any web browser
+   - The file is completely self-contained and works offline
+
+### Features of the Static HTML
+
+- ✅ **No server required** - Works by simply opening the HTML file
+- ✅ **Interactive tooltips** - Hover over sun icons to see person names and affiliations
+- ✅ **All tags included** - Automatically loads all tags from Google Drive
+- ✅ **Responsive design** - Works on desktop and mobile devices
+- ✅ **Self-contained** - All CSS and JavaScript is inline
+
+### Regenerating the HTML
+
+Whenever you update tags in Google Drive, simply run the script again to generate a fresh HTML file with the latest tags:
+
+```bash
+npm run generate-static-html
+```
+
 ## Development
 
 ### Available Scripts
@@ -136,6 +181,7 @@ Some potential enhancements:
 - `npm run build` - Build for production
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
+- `npm run generate-static-html` - Generate standalone HTML file with tags
 
 ### Code Quality
 
