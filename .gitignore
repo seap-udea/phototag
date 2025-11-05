@@ -42,3 +42,7 @@ next-env.d.ts
 
 # data directory for persistent storage
 /data
+
+# generated static HTML files
+phototag-astronomia-16.html
+pregrado-astronomia-2025.jpg
