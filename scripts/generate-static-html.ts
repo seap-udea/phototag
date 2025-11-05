@@ -75,9 +75,9 @@ function convertGoogleDriveUrlToDirect(url: string): string {
   
   if (fileId) {
     // For public images shared with "Anyone with the link can view"
-    // Use the thumbnail API with large size - this format is more reliable
-    // sz=w9999 requests maximum width, keeping aspect ratio
-    return `https://drive.google.com/thumbnail?id=${fileId}&sz=w9999`;
+    // Try using the direct download format which often works better for img tags
+    // Note: This requires the file to be publicly accessible
+    return `https://drive.google.com/uc?export=download&id=${fileId}`;
   }
   
   // If we can't extract the ID, return the original URL
@@ -248,7 +248,7 @@ function generateHTML(tags: Tag[], imageUrl?: string): string {
     </div>
     
     <div class="image-container">
-      <img src="${imgSrc}" alt="Foto del cumpleaños 16 del pregrado de astronomía 2025" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <img src="${imgSrc}" alt="Foto del cumpleaños 16 del pregrado de astronomía 2025" />
       <div class="suns-wrapper">
         ${sunsHTML}
       </div>
