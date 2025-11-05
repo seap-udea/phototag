@@ -61,11 +61,11 @@ function generateHTML(tags: Tag[]): string {
     
     return `
       <div class="sun-container" style="position: absolute; left: ${tag.x}%; top: ${tag.y}%; transform: translate(-50%, -50%); z-index: 10;">
-        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 10;">
           <circle cx="12" cy="12" r="4" fill="${color}" stroke="black" stroke-width="1"/>
           <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
-        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10000; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
           <div style="font-weight: 600; margin-bottom: 4px;">${escapeHtml(name)}</div>
           ${vinculo ? `<div style="font-size: 12px; color: #e5e7eb;">${escapeHtml(vinculo)}${yearIngreso ? ` (${escapeHtml(yearIngreso)})` : ''}</div>` : ''}
           <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>

@@ -433,6 +433,7 @@ export default function Home() {
                 style={{
                   left: `${tag.x}%`,
                   top: `${tag.y}%`,
+                  zIndex: 10,
                 }}
               >
                 {/* Star marker */}
@@ -442,6 +443,7 @@ export default function Home() {
                             className={`${getStarColor(tag.vinculo)} drop-shadow-lg ${isViewOnly || isMobile ? 'cursor-default' : 'cursor-move'} hover:scale-110 transition-transform ${
                               draggedTag === tag.id ? 'scale-125 shadow-xl' : ''
                             }`}
+                            style={{ zIndex: 10 }}
                             onMouseDown={(e) => handleDragStart(e, tag.id)}
                             onDoubleClick={(e) => {
                               e.stopPropagation();
@@ -454,7 +456,9 @@ export default function Home() {
                   {/* Tooltip with name and vínculo */}
                   <div className={`absolute top-full left-1/2 transform -translate-x-1/2 mt-2 transition-opacity duration-200 pointer-events-none ${
                     !isDragging && !justFinishedDragging ? 'opacity-0 group-hover:opacity-100' : 'opacity-0'
-                  }`}>
+                  }`}
+                  style={{ zIndex: 1000 }}
+                  >
                     <div className="bg-gray-900 text-white px-3 py-2 rounded-lg shadow-lg text-sm font-medium whitespace-nowrap relative">
                       <div className="flex items-center gap-2">
                         <User size={14} />
