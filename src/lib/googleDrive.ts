@@ -141,6 +141,8 @@ class GoogleDriveStorage {
     diagnostics?: {
       saEmailPresent: boolean;
       saKeyLength: number;
+      saKeyStartsWithBegin?: boolean;
+      saKeyEndsWithEnd?: boolean;
     }
   }> {
     const sa = this.isServiceAccountConfigured();
