@@ -52,7 +52,7 @@ function getStarColor(vinculo: string): string {
   }
 }
 
-function convertGoogleDriveUrlToDirect(url: string): string {
+async function convertGoogleDriveUrlToDirect(url: string): Promise<string> {
   // Extract file ID from Google Drive URL
   // Supports formats like:
   // - https://drive.google.com/file/d/FILE_ID/view
@@ -74,10 +74,28 @@ function convertGoogleDriveUrlToDirect(url: string): string {
   }
   
   if (fileId) {
-    // For public images shared with "Anyone with the link can view"
-    // Use the view format which is correct for displaying images in img tags
-    // Important: The file must be shared as "Anyone with the link can view"
-    return `https://drive.google.com/uc?export=view&id=${fileId}`;
+    // Try to get the direct URL by following redirects
+    // First, try the thumbnail API which often works better
+    const thumbnailUrl = `https://drive.google.com/thumbnail?id=${fileId}&sz=w1920`;
+    
+    try {
+      // Use fetch to follow redirects and get final URL
+      const response = await fetch(thumbnailUrl, { 
+        method: 'HEAD',
+        redirect: 'follow'
+      });
+      
+      if (response.ok && response.url) {
+        // If we got a final URL, use it
+        return response.url;
+      }
+    } catch (error) {
+      // If fetch fails, fall back to the thumbnail URL
+      console.warn('Could not resolve redirect, using thumbnail URL directly');
+    }
+    
+    // Fallback to thumbnail URL
+    return thumbnailUrl;
   }
   
   // If we can't extract the ID, return the original URL
@@ -86,7 +104,8 @@ function convertGoogleDriveUrlToDirect(url: string): string {
 
 function generateHTML(tags: Tag[], imageUrl?: string): string {
   // Use Google Drive URL if provided, otherwise use local image
-  const imgSrc = imageUrl ? convertGoogleDriveUrlToDirect(imageUrl) : 'pregrado-astronomia-2025.jpg';
+  // Note: imageUrl should already be converted to direct format
+  const imgSrc = imageUrl || 'pregrado-astronomia-2025.jpg';
   const sunsHTML = tags.map(tag => {
     const color = getStarColor(tag.vinculo);
     const name = `${tag.firstName} ${tag.lastName}`.trim();
@@ -248,7 +267,7 @@ function generateHTML(tags: Tag[], imageUrl?: string): string {
     </div>
     
     <div class="image-container">
-      <img src="${imgSrc}" alt="Foto del cumpleaños 16 del pregrado de astronomía 2025" onerror="this.onerror=null; this.src='pregrado-astronomia-2025.jpg'; console.error('Error cargando imagen desde Google Drive, usando imagen local como fallback');" />
+      <img src="${imgSrc}" alt="Foto del cumpleaños 16 del pregrado de astronomía 2025" />
       <div class="suns-wrapper">
         ${sunsHTML}
       </div>
@@ -280,15 +299,19 @@ async function main() {
     
     // Get Google Drive image URL from environment variable or use default
     const googleDriveImageUrl = process.env.GOOGLE_DRIVE_IMAGE_URL || process.env.GOOGLE_IMAGE_URL || '';
-    const html = generateHTML(tags, googleDriveImageUrl || undefined);
     
+    let finalImageUrl: string | undefined;
     if (googleDriveImageUrl) {
-      console.log(`✓ Usando imagen desde Google Drive: ${googleDriveImageUrl}`);
+      console.log(`✓ Convirtiendo URL de Google Drive: ${googleDriveImageUrl}`);
+      finalImageUrl = await convertGoogleDriveUrlToDirect(googleDriveImageUrl);
+      console.log(`✓ URL directa obtenida: ${finalImageUrl}`);
     } else {
       console.log(`⚠️  No se configuró GOOGLE_DRIVE_IMAGE_URL, usando imagen local`);
       console.log(`   Para usar imagen desde Google Drive, configura la variable de entorno:`);
       console.log(`   GOOGLE_DRIVE_IMAGE_URL=https://drive.google.com/file/d/FILE_ID/view`);
     }
+    
+    const html = generateHTML(tags, finalImageUrl);
     
     const outputPath = path.join(process.cwd(), 'phototag.html');
     fs.writeFileSync(outputPath, html, 'utf8');
@@ -299,20 +322,20 @@ async function main() {
     fs.writeFileSync(publicPath, html, 'utf8');
     console.log(`✓ HTML copiado a public/: ${publicPath}`);
     
-    // Always copy local image as fallback (even when using Google Drive)
-    const imageSource = path.join(process.cwd(), 'public', 'pregrado-astronomia-2025.jpg');
-    const imageDest = path.join(process.cwd(), 'pregrado-astronomia-2025.jpg');
-    
-    if (fs.existsSync(imageSource)) {
-      fs.copyFileSync(imageSource, imageDest);
-      console.log(`✓ Imagen local copiada como fallback: ${imageDest}`);
-    } else {
-      if (googleDriveImageUrl) {
-        console.warn(`⚠️  Imagen local no encontrada, usando solo Google Drive`);
+    // Only copy local image if NOT using Google Drive
+    if (!googleDriveImageUrl) {
+      const imageSource = path.join(process.cwd(), 'public', 'pregrado-astronomia-2025.jpg');
+      const imageDest = path.join(process.cwd(), 'pregrado-astronomia-2025.jpg');
+      
+      if (fs.existsSync(imageSource)) {
+        fs.copyFileSync(imageSource, imageDest);
+        console.log(`✓ Imagen local copiada: ${imageDest}`);
       } else {
         console.warn(`⚠️  Imagen local no encontrada en ${imageSource}`);
         console.warn(`   Asegúrate de copiar 'pregrado-astronomia-2025.jpg' al mismo directorio que el HTML`);
       }
+    } else {
+      console.log(`✓ Usando solo imagen desde Google Drive (sin archivos locales)`);
     }
     
     console.log(`\n📝 El archivo HTML está listo para compartir.`);
