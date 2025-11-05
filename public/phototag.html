@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pregrado de Astronomía - UdeA 2025: ¡16 años cumplidos!</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+      background: #33691E;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    
+    .header {
+      background: white;
+      color: #111827;
+      padding: 30px;
+      text-align: center;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .header h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+    
+    .image-container {
+      position: relative;
+      width: 100%;
+      padding-top: 66.67%; /* 3:2 aspect ratio */
+      background: #f3f4f6;
+    }
+    
+    .image-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    
+    .suns-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    
+    .sun-container {
+      pointer-events: auto;
+      position: relative;
+    }
+    
+    .sun-container:hover {
+      z-index: 10000 !important;
+    }
+    
+    .sun-container:hover .tooltip {
+      opacity: 1 !important;
+      visibility: visible !important;
+      z-index: 10001 !important;
+    }
+    
+    .sun-icon {
+      transition: transform 0.2s;
+      pointer-events: auto;
+    }
+    
+    .sun-container:hover .sun-icon {
+      transform: scale(1.1);
+    }
+    
+    .tooltip {
+      visibility: hidden;
+    }
+    
+    .tooltip.show {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    .footer {
+      background: #f9fafb;
+      padding: 20px;
+      text-align: center;
+      color: #6b7280;
+      font-size: 0.875rem;
+      border-top: 1px solid #e5e7eb;
+    }
+    
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 1.5rem;
+      }
+      
+      .header p {
+        font-size: 1rem;
+      }
+      
+      body {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Pregrado de Astronomía - UdeA (2025)</h1>
+      <p>¡16 años cumplidos!</p>
+    </div>
+    
+    <div class="image-container">
+      <img src="./pregrado-astronomia-2025.jpg" alt="Foto del cumpleaños 16 del pregrado de astronomía 2025" />
+      <div class="suns-wrapper">
+        
+      <div class="sun-container" style="position: absolute; left: 72.96195652173914%; top: 55.29548524930096%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Andersson Cano</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 61.197916666666664%; top: 70.61153551221899%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Andersson Rodríguez</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 75.40760869565217%; top: 56.501932200194794%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Andrea Benavides</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 41.90188223315823%; top: 73.09978048649903%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Andrés López Echeverri</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2020)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 83.56854838709677%; top: 66.08857808857809%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Ángel López</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 47.10069364971584%; top: 53.44038538739462%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Arley Hoyos Alzate</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2025)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 17.36111111111111%; top: 55.452964657140704%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Brallan Isaza Isaza</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 43.22916666666667%; top: 73.05232234481633%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Brandon Montoya</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 34.11458333333333%; top: 66.15816940987555%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Camilo Ospinal</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2018)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 77.30978260869566%; top: 65.75135882371423%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Candy López</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2023)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 37.93402777777778%; top: 74.12284223203532%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Catalina Alzate Henao</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2020)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 40.53819444444444%; top: 68.17074867962164%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Darwin Escobar Gallego</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2019)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 69.97282608695652%; top: 56.30085770837915%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">David Muñóz</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 50.54347826086957%; top: 56.099783216563516%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">David Napoleón Rangel</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 21.788194444444446%; top: 65.98688677677139%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#ef4444" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">David Santiago Duque</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Egresad@ (2016)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 18.14236111111111%; top: 78.49056603773586%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#22c55e" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Dora Ángela Hoyos Ayala</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Administración (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 26.90972222222222%; top: 63.11789238132276%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Gabriel Rodríguez</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 30.81597222222222%; top: 64.74508229626656%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#3b82f6" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">German Chaparro</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Docente (2020)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 64.40217391304348%; top: 70.87875836501304%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Harold David Vergel</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 12.934027777777779%; top: 53.82577278201526%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#3b82f6" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Ignacio Ferrin</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Docente (2013)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 39.80902698304918%; top: 57.422721798474505%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Jahilyn Andrea Moreno Brand</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2025)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 89.23611111111111%; top: 62.47558005695504%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Jaider Rincon Gallego</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 41.31944444444444%; top: 77.33440385387395%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#3b82f6" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Jorge Zuluaga</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Docente (2007)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 50.78125%; top: 78.83313326412585%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Josue Dominguez Alvarez</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 32.864582538604736%; top: 55.16178261271829%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Juan Camilo Hoyos Posso</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2025)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 29.166666666666668%; top: 71.42513046969088%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#3b82f6" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Juan Carlos Muñoz Cuartas</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Docente (2014)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 73.61111111111111%; top: 65.25893215576075%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Juan Felipe Garcés</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 72.82986111111111%; top: 72.96668004817343%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Juan Manuel Agudelo</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2019)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 57.85590277777778%; top: 52.541148133279805%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Juan Nicolás García Oliveros</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2022)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 66.92708333333334%; top: 76.0497792051385%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Juan Pablo Urrego</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 78.64583333333334%; top: 70.0976856527248%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Juliana Ruiz Montoya</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 47.74305555555556%; top: 73.39488957120635%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Laura Camila Mantilla López</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2021)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 28.29861111111111%; top: 77.33440385387395%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#3b82f6" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Lauren Flor</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Docente (2020)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 17.491319444444446%; top: 72.0674427940586%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Lily Dariana Conrado Vargas</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2024)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 59.72222222222222%; top: 76.43516659975913%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Luis Daniel Díaz Durango</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2020)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 92.79513888888889%; top: 76.30670413488558%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Luisa María Morales Sánchez</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2021)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 67.1875%; top: 55.624247290244874%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#ef4444" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Malory Agudelo</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Egresad@ (2016)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 46.875%; top: 78.19082093975813%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Manuela Guisao Sepúlveda</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 56.25%; top: 72.66693495019571%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Manuela Marín</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 38.42013809416029%; top: 55.1103974307507%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">María Claudia Páez Quintero</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2025)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 82.33695652173914%; top: 70.6776838731974%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Maria Jose Cuello Royo</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2024)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 54.77430555555556%; top: 76.82055399437976%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Mariana Gómez</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 34.11458333333333%; top: 77.46286631874749%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#3b82f6" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Maryory Loaiza</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Docente (2020)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 70.83333333333334%; top: 65.08764952265656%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Mateo Preciado Estrada</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 23.87152777777778%; top: 75.19336407943597%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#ef4444" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Mauricio Ruiz</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Egresad@ (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 11.005434782608695%; top: 64.94706085645167%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Mayra Moreno</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 63.541666666666664%; top: 54.98193496587716%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Melanie Muñoz Chavarria</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2021)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 30.03472222222222%; top: 54.8962946294159%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Nicolás Loaiza</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 26.38888888888889%; top: 68.98434363709353%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Pablo Agudelo</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 34.46180555555556%; top: 71.55359293456443%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#3b82f6" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Pablo Cuartas</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Docente (2014)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 75.95486111111111%; top: 67.2286912572762%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Ruby Contreras</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 69.44444444444444%; top: 69.88358089120835%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#ef4444" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Samuel Giraldo Builes</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Egresad@ (2018)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 44.01041666666667%; top: 52.62679042992272%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Santiago Herrera</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 71.875%; top: 75.66439181051786%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Santiago Vallejo Restrepo</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2022)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 96.33152173913044%; top: 73.39218951270854%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Sara Giraldo</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 38.02083333333333%; top: 66.54355680449619%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Sebastián Numpaque</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2021)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 55.70652173913043%; top: 54.49118728203839%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Sebastián Rodríguez</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 75.78125%; top: 74.12284223203532%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Sebastian Yepes Acevedo</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2020)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 35.03472142749363%; top: 53.106383174741566%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Sergio David Puello García</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2025)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 9.635416666666668%; top: 74.12284223203532%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Silvia Juliana Cárdenas Hernández</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2022)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 51.041666666666664%; top: 72.9238598799428%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Simón Rodríguez</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 42.62152777777778%; top: 56.52348454435969%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Sofia Cordoba</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2024)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 43.75%; top: 67.95664391810517%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Sofía Lorena Casallas Beltrán</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2020)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 53.60243055555556%; top: 54.72501003613007%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Soleil Dayana Niño murcia</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (No especificado)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 91.05902777777779%; top: 54.211160176635886%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Valeria Valencia Colorado</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2021)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 36.59722142749363%; top: 56.446407261453736%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Valery Montes García</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2025)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 82.37847222222221%; top: 78.10517864311521%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Vanessa Garcia Forero</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2021)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      <div class="sun-container" style="position: absolute; left: 89.23611111111111%; top: 77.2059413890004%; transform: translate(-50%, -50%); z-index: 10;">
+        <svg class="sun-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+          <circle cx="12" cy="12" r="4" fill="#eab308" stroke="black" stroke-width="1"/>
+          <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34l-1.41-1.41" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tooltip" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s; background: #111827; color: white; padding: 8px 12px; border-radius: 6px; white-space: nowrap; font-size: 14px; z-index: 10001; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+          <div style="font-weight: 600; margin-bottom: 4px;">Ximena Orrego Gómez</div>
+          <div style="font-size: 12px; color: #e5e7eb;">Estudiante (2021)</div>
+          <div class="tooltip-arrow" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111827;"></div>
+        </div>
+      </div>
+    
+      </div>
+    </div>
+    
+    <div class="footer">
+      <p><i>Desarrollado por Jorge I. Zuluaga (Astronomía, UdeA) con la asistencia de Cursor (2025) v0.3.0</i></p>
+      <p style="margin-top: 8px; font-size: 0.75rem;">Generado el 4 de noviembre de 2025, 23:04</p>
+    </div>
+  </div>
+</body>
+</html>

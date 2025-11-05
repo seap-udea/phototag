@@ -689,6 +689,17 @@ export default function Home() {
           </div>
         )}
         
+        {/* Download static HTML link */}
+        <div className="mt-8 text-center">
+          <a
+            href="/phototag.html"
+            download="phototag.html"
+            className="text-blue-600 hover:text-blue-800 underline text-sm font-medium"
+          >
+            Descarga una versión estática de la foto
+          </a>
+        </div>
+        
         {/* Footer */}
         <footer className="mt-12 text-center">
           <p className="text-sm text-gray-500">

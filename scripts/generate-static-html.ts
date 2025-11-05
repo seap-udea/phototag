@@ -214,7 +214,7 @@ function generateHTML(tags: Tag[]): string {
     </div>
     
     <div class="image-container">
-      <img src="./pregrado-astronomia-2025.jpg" alt="Foto del cumpleaños 16 del pregrado de astronomía 2025" />
+      <img src="pregrado-astronomia-2025.jpg" alt="Foto del cumpleaños 16 del pregrado de astronomía 2025" />
       <div class="suns-wrapper">
         ${sunsHTML}
       </div>
@@ -247,6 +247,12 @@ async function main() {
     
     const outputPath = path.join(process.cwd(), 'phototag.html');
     fs.writeFileSync(outputPath, html, 'utf8');
+    console.log(`✓ HTML generado: ${outputPath}`);
+    
+    // Also copy to public/ directory for Next.js to serve it
+    const publicPath = path.join(process.cwd(), 'public', 'phototag.html');
+    fs.writeFileSync(publicPath, html, 'utf8');
+    console.log(`✓ HTML copiado a public/: ${publicPath}`);
     
     // Copy the image file to the same directory as the HTML
     const imageSource = path.join(process.cwd(), 'public', 'pregrado-astronomia-2025.jpg');
@@ -260,9 +266,9 @@ async function main() {
       console.warn(`   Asegúrate de copiar 'pregrado-astronomia-2025.jpg' al mismo directorio que el HTML`);
     }
     
-    console.log(`✓ HTML generado exitosamente: ${outputPath}`);
     console.log(`\n📝 El archivo HTML está listo para compartir.`);
-    console.log(`   Ábrelo en cualquier navegador para ver la foto con las etiquetas.\n`);
+    console.log(`   - Abre phototag.html directamente en cualquier navegador`);
+    console.log(`   - O descárgalo desde la aplicación web usando el enlace\n`);
     
   } catch (error: any) {
     console.error('❌ Error:', error?.message || error);
