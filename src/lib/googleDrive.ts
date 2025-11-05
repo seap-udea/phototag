@@ -57,21 +57,73 @@ class GoogleDriveStorage {
       return [];
     }
 
-    try {
-      // List files in the configured folder
-      const response = await this.drive.files.list({
-        q: this.config.folderId 
-          ? `'${this.config.folderId}' in parents and trashed=false`
-          : 'trashed=false',
-        fields: 'files(id, name, mimeType)',
-        pageSize: 50,
-      });
+    const allFiles: { id: string; name: string; mimeType: string }[] = [];
 
-      return (response.data.files || []).map((file: any) => ({
-        id: file.id,
-        name: file.name,
-        mimeType: file.mimeType || 'unknown',
-      }));
+    try {
+      // First, try to list files in the configured folder
+      if (this.config.folderId) {
+        try {
+          const folderResponse = await this.drive.files.list({
+            q: `'${this.config.folderId}' in parents and trashed=false`,
+            fields: 'files(id, name, mimeType)',
+            pageSize: 50,
+          });
+          const folderFiles = (folderResponse.data.files || []).map((file: any) => ({
+            id: file.id,
+            name: file.name,
+            mimeType: file.mimeType || 'unknown',
+          }));
+          allFiles.push(...folderFiles);
+        } catch (folderError: any) {
+          console.warn('Error listing folder files:', folderError?.response?.data || folderError?.message);
+        }
+      }
+
+      // Also search for common file names that might be shared directly (not in folder)
+      const searchNames = ['phototag-tags.json', 'phototags-data', 'tags.json'];
+      for (const fileName of searchNames) {
+        try {
+          const searchResponse = await this.drive.files.list({
+            q: `name='${fileName}' and trashed=false`,
+            fields: 'files(id, name, mimeType)',
+            pageSize: 10,
+          });
+          const searchFiles = (searchResponse.data.files || []).map((file: any) => ({
+            id: file.id,
+            name: file.name,
+            mimeType: file.mimeType || 'unknown',
+          }));
+          // Avoid duplicates
+          for (const file of searchFiles) {
+            if (!allFiles.find(f => f.id === file.id)) {
+              allFiles.push(file);
+            }
+          }
+        } catch (searchError: any) {
+          console.warn(`Error searching for ${fileName}:`, searchError?.response?.data || searchError?.message);
+        }
+      }
+
+      // If still no files, try listing all accessible files (broader search)
+      if (allFiles.length === 0) {
+        try {
+          const allResponse = await this.drive.files.list({
+            q: 'trashed=false',
+            fields: 'files(id, name, mimeType)',
+            pageSize: 20,
+          });
+          const allAccessibleFiles = (allResponse.data.files || []).map((file: any) => ({
+            id: file.id,
+            name: file.name,
+            mimeType: file.mimeType || 'unknown',
+          }));
+          allFiles.push(...allAccessibleFiles);
+        } catch (allError: any) {
+          console.warn('Error listing all files:', allError?.response?.data || allError?.message);
+        }
+      }
+
+      return allFiles;
     } catch (error: any) {
       console.error('Error listing files:', error?.response?.data || error?.message || error);
       return [];
