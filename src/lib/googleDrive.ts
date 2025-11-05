@@ -127,7 +127,7 @@ class GoogleDriveStorage {
         console.error('Service Account authorize() failed:', e?.response?.data || e?.message || e);
       });
       this.drive = google.drive({ version: 'v3', auth: this.auth });
-      console.log('Initialized Google Drive with Service Account');
+      console.log('Initialized Google Drive with Service Account:', this.config.serviceAccountEmail);
     } else if (this.isOAuthConfigured()) {
       // Fallback to OAuth client credentials
       this.auth = new google.auth.OAuth2(
@@ -258,6 +258,13 @@ Original error: ${typeof createMsg === 'string' ? createMsg : JSON.stringify(cre
           } catch (verifyError: any) {
             const verifyDetails = verifyError?.response?.data || verifyError?.message || verifyError;
             console.error('File verification failed:', verifyDetails);
+            console.error('Service Account email:', this.config.serviceAccountEmail);
+            console.error('IMPORTANT: The file must be explicitly shared with the Service Account email above as Editor.');
+            console.error('"Everyone" permissions may not work for Service Accounts. You must:');
+            console.error('1. Open the file in Google Drive');
+            console.error('2. Click "Share"');
+            console.error(`3. Add "${this.config.serviceAccountEmail}" as Editor`);
+            console.error('4. Make sure the file is NOT in a Shared Drive (or add Service Account to Shared Drive)');
             
             // Try to list files to see what the Service Account can access
             try {
@@ -268,6 +275,9 @@ Original error: ${typeof createMsg === 'string' ? createMsg : JSON.stringify(cre
                 pageSize: 10,
               });
               console.log('Accessible files:', listResponse.data.files);
+              if (!listResponse.data.files || listResponse.data.files.length === 0) {
+                console.error('Service Account cannot see ANY files. This confirms the file is not shared with the Service Account.');
+              }
             } catch (listError: any) {
               console.error('Could not list files:', listError?.response?.data || listError?.message || listError);
             }
