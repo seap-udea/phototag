@@ -30,14 +30,17 @@ export default function Home() {
   const [isSaving, setIsSaving] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isViewOnly, setIsViewOnly] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
-  // Check for view-only mode from URL parameter
+  // Check for view-only mode and admin mode from URL parameters
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const viewOnly = urlParams.get('photo') === '1803';
+    const admin = urlParams.get('admin') === '1803';
     setIsViewOnly(viewOnly);
+    setIsAdmin(admin);
   }, []);
 
   // Set client-side flag to prevent hydration issues
@@ -442,7 +445,7 @@ export default function Home() {
                             onMouseDown={(e) => handleDragStart(e, tag.id)}
                             onDoubleClick={(e) => {
                               e.stopPropagation();
-                              if (!isViewOnly && !isMobile) {
+                              if (isAdmin && !isMobile) {
                                 removeTag(tag.id);
                               }
                             }}
@@ -611,13 +614,17 @@ export default function Home() {
                     >
                       Editar
                     </button>
-                    <span className="text-gray-400">|</span>
-                    <button
-                      onClick={() => removeTag(tag.id)}
-                      className="text-red-600 hover:text-red-800 underline"
-                    >
-                      Borrar
-                    </button>
+                    {isAdmin && (
+                      <>
+                        <span className="text-gray-400">|</span>
+                        <button
+                          onClick={() => removeTag(tag.id)}
+                          className="text-red-600 hover:text-red-800 underline"
+                        >
+                          Borrar
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
               ))}
@@ -625,8 +632,8 @@ export default function Home() {
           </div>
         )}
         
-        {/* Download and Upload Buttons - Hidden in view-only mode */}
-        {!isViewOnly && (
+        {/* Download and Upload Buttons - Only visible in admin mode */}
+        {isAdmin && (
           <div className="mt-8 text-center">
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               {/* Download Button */}
