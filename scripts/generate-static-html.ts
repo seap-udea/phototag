@@ -75,9 +75,9 @@ function convertGoogleDriveUrlToDirect(url: string): string {
   
   if (fileId) {
     // For public images shared with "Anyone with the link can view"
-    // Try using the direct download format which often works better for img tags
-    // Note: This requires the file to be publicly accessible
-    return `https://drive.google.com/uc?export=download&id=${fileId}`;
+    // Use the view format which is correct for displaying images in img tags
+    // Important: The file must be shared as "Anyone with the link can view"
+    return `https://drive.google.com/uc?export=view&id=${fileId}`;
   }
   
   // If we can't extract the ID, return the original URL
@@ -248,7 +248,7 @@ function generateHTML(tags: Tag[], imageUrl?: string): string {
     </div>
     
     <div class="image-container">
-      <img src="${imgSrc}" alt="Foto del cumpleaños 16 del pregrado de astronomía 2025" />
+      <img src="${imgSrc}" alt="Foto del cumpleaños 16 del pregrado de astronomía 2025" onerror="this.onerror=null; this.src='pregrado-astronomia-2025.jpg'; console.error('Error cargando imagen desde Google Drive, usando imagen local como fallback');" />
       <div class="suns-wrapper">
         ${sunsHTML}
       </div>
