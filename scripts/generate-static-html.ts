@@ -299,21 +299,20 @@ async function main() {
     fs.writeFileSync(publicPath, html, 'utf8');
     console.log(`✓ HTML copiado a public/: ${publicPath}`);
     
-    // Only copy local image if not using Google Drive URL
-    if (!googleDriveImageUrl) {
-      const imageSource = path.join(process.cwd(), 'public', 'pregrado-astronomia-2025.jpg');
-      const imageDest = path.join(process.cwd(), 'pregrado-astronomia-2025.jpg');
-      
-      if (fs.existsSync(imageSource)) {
-        fs.copyFileSync(imageSource, imageDest);
-        console.log(`✓ Imagen local copiada: ${imageDest}`);
+    // Always copy local image as fallback (even when using Google Drive)
+    const imageSource = path.join(process.cwd(), 'public', 'pregrado-astronomia-2025.jpg');
+    const imageDest = path.join(process.cwd(), 'pregrado-astronomia-2025.jpg');
+    
+    if (fs.existsSync(imageSource)) {
+      fs.copyFileSync(imageSource, imageDest);
+      console.log(`✓ Imagen local copiada como fallback: ${imageDest}`);
+    } else {
+      if (googleDriveImageUrl) {
+        console.warn(`⚠️  Imagen local no encontrada, usando solo Google Drive`);
       } else {
         console.warn(`⚠️  Imagen local no encontrada en ${imageSource}`);
         console.warn(`   Asegúrate de copiar 'pregrado-astronomia-2025.jpg' al mismo directorio que el HTML`);
-        console.warn(`   O configura GOOGLE_DRIVE_IMAGE_URL para usar imagen desde Google Drive`);
       }
-    } else {
-      console.log(`✓ Imagen se carga desde Google Drive, no se necesita archivo local`);
     }
     
     console.log(`\n📝 El archivo HTML está listo para compartir.`);
