@@ -199,7 +199,7 @@ class GoogleDriveStorage {
       this.auth = new google.auth.JWT({
         email: this.config.serviceAccountEmail,
         key: this.config.serviceAccountPrivateKey,
-        scopes: ['https://www.googleapis.com/auth/drive.file'],
+        scopes: ['https://www.googleapis.com/auth/drive'],
       });
       // Ensure we obtain an access token before using the client
       this.auth.authorize().catch((e: any) => {
