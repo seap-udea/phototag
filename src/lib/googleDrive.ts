@@ -51,6 +51,33 @@ class GoogleDriveStorage {
     }
   }
 
+  // List files accessible to the Service Account
+  public async listFiles(): Promise<{ id: string; name: string; mimeType: string }[]> {
+    if (!this.isConfigured() || !this.drive) {
+      return [];
+    }
+
+    try {
+      // List files in the configured folder
+      const response = await this.drive.files.list({
+        q: this.config.folderId 
+          ? `'${this.config.folderId}' in parents and trashed=false`
+          : 'trashed=false',
+        fields: 'files(id, name, mimeType)',
+        pageSize: 50,
+      });
+
+      return (response.data.files || []).map((file: any) => ({
+        id: file.id,
+        name: file.name,
+        mimeType: file.mimeType || 'unknown',
+      }));
+    } catch (error: any) {
+      console.error('Error listing files:', error?.response?.data || error?.message || error);
+      return [];
+    }
+  }
+
   // Expose minimal debug information safely (no secrets)
   public async debugStatus(): Promise<{ 
     isServiceAccountConfigured: boolean; 

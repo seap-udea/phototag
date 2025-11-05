@@ -5,11 +5,20 @@ export async function GET() {
   try {
     const driveStorage = new GoogleDriveStorage();
     const status = await driveStorage.debugStatus();
-    return NextResponse.json({ success: true, status });
+    const files = await driveStorage.listFiles();
+    return NextResponse.json({ 
+      success: true, 
+      status: {
+        ...status,
+        files,
+        filesCount: files.length,
+      }
+    });
   } catch (error: any) {
     const message = error?.message || 'Unknown error';
     return NextResponse.json({ success: false, error: message }, { status: 500 });
   }
 }
+
 
 
